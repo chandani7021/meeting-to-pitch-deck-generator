@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codeck — Technical Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #f4f4f6;
+      --card-dark: #ffffff;
+      --card-hover: #f8f8fb;
+      --border-color: rgba(0,0,0,0.08);
+      --text-primary: #18181b;
+      --text-secondary: #52525b;
+      --accent-purple: #7c3aed;
+      --accent-cyan: #0891b2;
+      --accent-green: #059669;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --font-size-base: 12px;
+      --font-size-sm: 11px;
+      --font-size-xs: 10px;
+      --font-size-md: 13px;
+      --font-size-lg: 15px;
+      --font-size-xl: 18px;
+      --font-size-h1: 22px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: var(--font-size-base);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+
+    .ambient-glow {
+      position: fixed; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(124,58,237,0.05) 0%, rgba(8,145,178,0.02) 50%, transparent 100%);
+      top: -150px; right: -150px; z-index: -1; pointer-events: none;
+    }
+    .ambient-glow-2 {
+      position: fixed; width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(8,145,178,0.03) 0%, rgba(124,58,237,0.01) 60%, transparent 100%);
+      bottom: -250px; left: -250px; z-index: -1; pointer-events: none;
+    }
+
+    header {
+      padding: 2rem 2rem 1.5rem 2rem;
+      max-width: 1400px; margin: 0 auto;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .header-content { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; }
+    .badge {
+      background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+      color: white; padding: 0.25rem 0.7rem; border-radius: 9999px;
+      font-size: var(--font-size-xs); font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; display: inline-block; margin-bottom: 0.5rem;
+    }
+    header h1 {
+      font-size: var(--font-size-h1);
+      background: linear-gradient(135deg, #18181b 30%, #52525b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    header p { color: var(--text-secondary); font-size: var(--font-size-sm); margin-top: 0.4rem; max-width: 800px; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 1.5rem 2rem; }
+
+    .tabs {
+      display: flex; gap: 0.5rem; margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color); padding-bottom: 0.6rem;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent; border: none; color: var(--text-secondary);
+      font-family: 'Outfit', sans-serif; font-size: var(--font-size-md); font-weight: 600;
+      padding: 0.4rem 1rem; cursor: pointer; transition: all 0.3s ease;
+      position: relative; white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-primary); }
+    .tab-btn.active { color: var(--accent-purple); }
+    .tab-btn.active::after {
+      content: ''; position: absolute; bottom: -0.75rem; left: 0;
+      width: 100%; height: 2px; background-color: var(--accent-purple);
+    }
+    .tab-content { display: none; animation: fadeIn 0.3s ease-out forwards; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+    .card {
+      background-color: var(--card-dark); border: 1px solid var(--border-color);
+      border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem;
+    }
+    .card h2 {
+      font-size: var(--font-size-lg); margin-bottom: 1.1rem;
+      display: flex; align-items: center; gap: 0.6rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 0.6rem;
+    }
+    .card h2::before {
+      content: ''; display: inline-block; width: 10px; height: 10px;
+      border-radius: 3px; background-color: var(--accent-purple); flex-shrink: 0;
+    }
+    .card.cyan h2::before { background-color: var(--accent-cyan); }
+    .card.green h2::before { background-color: var(--accent-green); }
+    .card.amber h2::before { background-color: var(--accent-amber); }
+    .card.rose h2::before { background-color: var(--accent-rose); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; align-items: start; }
+    @media (max-width: 1100px) { .three-col { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 700px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+
+    .list-items { list-style: none; }
+    .list-items li {
+      padding: 0.8rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+      display: flex; flex-direction: column; gap: 0.2rem;
+    }
+    .list-items li:last-child { border-bottom: none; }
+    .item-title {
+      font-weight: 600; color: var(--text-primary); font-size: var(--font-size-md);
+      display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;
+    }
+    .item-meta {
+      font-size: var(--font-size-xs); background-color: rgba(0,0,0,0.05);
+      padding: 0.12rem 0.45rem; border-radius: 4px; color: var(--text-secondary);
+      font-family: monospace; white-space: nowrap; flex-shrink: 0;
+    }
+    .item-meta.done { background: rgba(5,150,105,0.1); color: var(--accent-green); }
+    .item-meta.partial { background: rgba(217,119,6,0.1); color: var(--accent-amber); }
+    .item-desc { color: var(--text-secondary); font-size: var(--font-size-sm); }
+
+    .code-pill {
+      font-family: monospace; background-color: rgba(8,145,178,0.08);
+      padding: 0.08rem 0.3rem; border-radius: 3px; color: var(--accent-cyan);
+      font-size: 0.9em; border: 1px solid rgba(8,145,178,0.15);
+    }
+
+    pre.code-block {
+      background: #f4f4f6; border-radius: 8px; padding: 0.75rem;
+      font-size: var(--font-size-xs); color: #52525b; font-family: monospace;
+      border: 1px solid var(--border-color); overflow-x: auto; margin-top: 0.5rem;
+      line-height: 1.7; white-space: pre;
+    }
+    pre.code-block .k { color: var(--accent-purple); }
+    pre.code-block .s { color: var(--accent-green); }
+    pre.code-block .c { color: #a1a1aa; }
+
+    .highlight-box {
+      background: rgba(124,58,237,0.05); border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 10px; padding: 0.9rem 1rem; margin-top: 0.7rem;
+      font-size: var(--font-size-sm); color: var(--text-secondary);
+      border-left: 3px solid var(--accent-purple);
+    }
+    .highlight-box.cyan { background: rgba(8,145,178,0.05); border-color: rgba(8,145,178,0.15); border-left-color: var(--accent-cyan); }
+    .highlight-box.green { background: rgba(5,150,105,0.05); border-color: rgba(5,150,105,0.15); border-left-color: var(--accent-green); }
+    .highlight-box.amber { background: rgba(217,119,6,0.05); border-color: rgba(217,119,6,0.15); border-left-color: var(--accent-amber); }
+    .highlight-box.rose { background: rgba(225,29,72,0.05); border-color: rgba(225,29,72,0.15); border-left-color: var(--accent-rose); }
+
+    .flow-step {
+      display: flex; gap: 0.85rem; align-items: flex-start;
+      padding: 0.7rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .flow-step:last-child { border-bottom: none; }
+    .step-num {
+      width: 22px; height: 22px; border-radius: 50%; background: rgba(124,58,237,0.1);
+      border: 1px solid rgba(124,58,237,0.3); display: flex; align-items: center; justify-content: center;
+      font-size: var(--font-size-xs); font-weight: 700; color: var(--accent-purple);
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .step-num.cyan { background: rgba(8,145,178,0.1); border-color: rgba(8,145,178,0.25); color: var(--accent-cyan); }
+    .step-num.green { background: rgba(5,150,105,0.1); border-color: rgba(5,150,105,0.25); color: var(--accent-green); }
+    .step-num.amber { background: rgba(217,119,6,0.1); border-color: rgba(217,119,6,0.25); color: var(--accent-amber); }
+    .step-body { flex: 1; }
+    .step-title { font-weight: 600; color: var(--text-primary); font-size: var(--font-size-md); }
+    .step-desc { color: var(--text-secondary); font-size: var(--font-size-sm); margin-top: 0.15rem; }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+    .pill {
+      font-family: monospace; font-size: var(--font-size-xs);
+      background: rgba(8,145,178,0.07); border: 1px solid rgba(8,145,178,0.2);
+      color: var(--accent-cyan); padding: 0.2rem 0.5rem; border-radius: 5px;
+    }
+    .pill.purple { background: rgba(124,58,237,0.07); border-color: rgba(124,58,237,0.2); color: var(--accent-purple); }
+    .pill.green { background: rgba(5,150,105,0.07); border-color: rgba(5,150,105,0.2); color: var(--accent-green); }
+    .pill.amber { background: rgba(217,119,6,0.07); border-color: rgba(217,119,6,0.2); color: var(--accent-amber); }
+    .pill.rose { background: rgba(225,29,72,0.07); border-color: rgba(225,29,72,0.2); color: var(--accent-rose); }
+
+    .metrics-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .metric-card {
+      background-color: var(--card-dark); border: 1px solid var(--border-color);
+      border-radius: 14px; padding: 1.1rem; position: relative; overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .metric-card:hover { transform: translateY(-3px); border-color: rgba(124,58,237,0.3); }
+    .metric-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%; background-color: var(--accent-purple);
+    }
+    .metric-card.cyan::before { background-color: var(--accent-cyan); }
+    .metric-card.green::before { background-color: var(--accent-green); }
+    .metric-card.amber::before { background-color: var(--accent-amber); }
+    .metric-card.rose::before { background-color: var(--accent-rose); }
+    .metric-title { color: var(--text-secondary); font-size: var(--font-size-xs); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .metric-value { font-size: var(--font-size-xl); font-weight: 700; color: var(--text-primary); font-family: 'Outfit', sans-serif; }
+    .metric-desc { font-size: var(--font-size-xs); color: var(--text-secondary); margin-top: 0.3rem; }
+
+    .folder-tree {
+      background: #f8f8fb; border-radius: 10px; padding: 1rem 1.2rem;
+      font-family: monospace; font-size: var(--font-size-xs);
+      line-height: 1.9; color: var(--text-secondary); border: 1px solid var(--border-color);
+      overflow-x: auto; white-space: pre;
+    }
+    .folder-tree .dir { color: var(--accent-cyan); font-weight: 700; }
+    .folder-tree .file { color: #52525b; }
+    .folder-tree .cm { color: #a1a1aa; }
+    .folder-tree .hl { color: var(--accent-purple); font-weight: 600; }
+    .folder-tree .grn { color: var(--accent-green); }
+    .folder-tree .amb { color: var(--accent-amber); }
+
+    table { width: 100%; border-collapse: collapse; font-size: var(--font-size-sm); }
+    thead { background: #f8f8fb; }
+    th {
+      padding: 10px 14px; text-align: left; font-weight: 600;
+      color: var(--text-secondary); font-size: var(--font-size-xs);
+      text-transform: uppercase; letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-color);
+    }
+    td { padding: 10px 14px; border-bottom: 1px solid rgba(0,0,0,0.04); color: var(--text-secondary); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8f8fb; }
+    .good { color: var(--accent-green); font-weight: 600; }
+    .bad { color: var(--accent-rose); font-weight: 600; }
+    .okay { color: var(--accent-amber); font-weight: 600; }
+
+    .section-label {
+      font-size: var(--font-size-xs); text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--text-secondary); font-weight: 700; margin-bottom: 0.5rem;
+    }
+
+    .done-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(5,150,105,0.1); border: 1px solid rgba(5,150,105,0.25);
+      color: var(--accent-green); font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .pending-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(217,119,6,0.1); border: 1px solid rgba(217,119,6,0.25);
+      color: var(--accent-amber); font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    /* ── Orchestration diagram ── */
+    .orch-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 0.5rem 0;
+    }
+    .orch-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .orch-node {
+      border: 1px solid rgba(8,145,178,0.3);
+      background: rgba(8,145,178,0.06);
+      color: var(--accent-cyan);
+      border-radius: 7px;
+      padding: 5px 14px;
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      font-family: monospace;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+    .orch-node.purple { border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.06); color: var(--accent-purple); }
+    .orch-node.green  { border-color: rgba(5,150,105,0.3);  background: rgba(5,150,105,0.06);  color: var(--accent-green); }
+    .orch-node.amber  { border-color: rgba(217,119,6,0.3);  background: rgba(217,119,6,0.06);  color: var(--accent-amber); }
+    .orch-node.rose   { border-color: rgba(225,29,72,0.3);  background: rgba(225,29,72,0.06);  color: var(--accent-rose); }
+    .orch-node.wide   { min-width: 240px; text-align: center; }
+    .orch-node.layer  { font-size: var(--font-size-xs); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; letter-spacing: 0; }
+    .orch-sep {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 2px 0;
+    }
+    .orch-line {
+      width: 1px;
+      height: 14px;
+      background: var(--border-color);
+    }
+    .orch-arrow-txt {
+      font-size: 9px;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 1px 8px;
+      white-space: nowrap;
+    }
+    .orch-divider-label {
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-secondary);
+      margin: 0.6rem 0 0.3rem;
+      text-align: center;
+    }
+    .orch-group {
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+    }
+    .orch-group-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+
+    footer {
+      text-align: center; margin-top: 3rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-secondary); font-size: var(--font-size-xs);
+      padding-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-2"></div>
+
+  <header>
+    <div class="header-content">
+      <div>
+        <span class="badge">Copods · Codeck</span>
+        <h1>Technical Documentation & Roadmap</h1>
+        <p>Complete overview of the Codeck meeting intelligence platform — technologies, AI providers, current features, configuration, and future improvements.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('overview', this)">Overview</button>
+      <button class="tab-btn" onclick="switchTab('stack', this)">Tech Stack</button>
+      <button class="tab-btn" onclick="switchTab('features', this)">Features</button>
+      <button class="tab-btn" onclick="switchTab('config', this)">APIs &amp; Config</button>
+      <button class="tab-btn" onclick="switchTab('future', this)">Future &amp; Improvements</button>
+      <button class="tab-btn" onclick="switchTab('architecture', this)">Architecture</button>
+    </div>
+
+    <!-- ═══════════════════════════ OVERVIEW ═══════════════════════════ -->
+    <div id="tab-overview" class="tab-content active">
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-title">AI Providers</div>
+          <div class="metric-value">4</div>
+          <div class="metric-desc">Groq · Gemini · OpenAI · Claude</div>
+        </div>
+        <div class="metric-card cyan">
+          <div class="metric-title">Deck Types</div>
+          <div class="metric-value">6</div>
+          <div class="metric-desc">Proposal · Pitch · Interview · Kickoff · Strategy · Status</div>
+        </div>
+        <div class="metric-card green">
+          <div class="metric-title">Recording Modes</div>
+          <div class="metric-value">2</div>
+          <div class="metric-desc">Microphone only · System audio + mic mix</div>
+        </div>
+        <div class="metric-card amber">
+          <div class="metric-title">Transcription Providers</div>
+          <div class="metric-value">3</div>
+          <div class="metric-desc">Groq Whisper · Gemini inline · OpenAI Whisper-1</div>
+        </div>
+        <div class="metric-card rose">
+          <div class="metric-title">Audio Segment Size</div>
+          <div class="metric-value">5 s</div>
+          <div class="metric-desc">MediaRecorder restart loop — fresh WebM header each segment</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">API Routes</div>
+          <div class="metric-value">10</div>
+          <div class="metric-desc">analyze · transcribe · generate · files · calendar · config · health</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h2>What is Codeck?</h2>
+          <p style="color:var(--text-secondary);font-size:var(--font-size-sm);margin-bottom:0.8rem;">Codeck is a macOS desktop app built with Electron that records meetings — mic-only or system audio + microphone — transcribes speech in real time using Groq Whisper, analyzes the transcript with an AI provider of your choice, and generates a branded PowerPoint deck, all in one flow.</p>
+          <p style="color:var(--text-secondary);font-size:var(--font-size-sm);margin-bottom:0.8rem;">It is built by and for Copods. The AI prompt engine is pre-loaded with Copods company profile data scraped from copods.co — so every proposal deck automatically includes relevant case studies, differentiators, engagement models, and testimonials with no manual input.</p>
+          <div class="highlight-box cyan">
+            <strong>Active provider:</strong> <code class="code-pill">groq</code> — <code class="code-pill">openai/gpt-oss-120b</code> for analysis, <code class="code-pill">whisper-large-v3-turbo</code> for transcription. Switch any time via <code class="code-pill">AI_PROVIDER</code> in <code class="code-pill">server/.env</code>.
+          </div>
+          <div class="highlight-box amber" style="margin-top:0.5rem;">
+            <strong>Data lives locally:</strong> All meetings, tokens, and generated files are stored in <code class="code-pill">~/.codeck/</code>. No cloud account required to run the app.
+          </div>
+        </div>
+
+        <div class="card green">
+          <h2>End-to-End Flow</h2>
+          <div class="flow-step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Record</div>
+              <div class="step-desc">User starts mic-only or meeting capture. Web Audio API mixes microphone + system audio into one stream via <code class="code-pill">AudioContext</code> + <code class="code-pill">createMediaStreamDestination()</code>.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-num cyan">2</div>
+            <div class="step-body">
+              <div class="step-title">Segment</div>
+              <div class="step-desc">MediaRecorder restarts every 5 seconds. Each restart writes a fresh WebM container header — making every segment a valid standalone file that Whisper accepts.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-num green">3</div>
+            <div class="step-body">
+              <div class="step-title">Transcribe</div>
+              <div class="step-desc">Each 5-second blob is POSTed to <code class="code-pill">POST /api/transcribe</code>. Text is appended to the running transcript display in real time.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-num amber">4</div>
+            <div class="step-body">
+              <div class="step-title">Intent + Analyze</div>
+              <div class="step-desc">User picks a deck type and optional free-text. Transcript + intent sent to <code class="code-pill">POST /api/analyze</code>. The Copods company profile is only injected when the intent signals a proposal or pitch — never for interview, kickoff, or status decks.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <div class="step-title">Generate PPTX</div>
+              <div class="step-desc">AI JSON passed to <code class="code-pill">POST /api/generate</code>. pptxgenjs builds the deck using <code class="code-pill">~/.codeck/template.pptx</code> as the brand base.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-num cyan">6</div>
+            <div class="step-body">
+              <div class="step-title">Save &amp; History</div>
+              <div class="step-desc">File written to <code class="code-pill">~/.codeck/output/</code> with a unique base-36 timestamp suffix. Meeting appended to <code class="code-pill">meetings.json</code> for the history view.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════ TECH STACK ═══════════════════════════ -->
+    <div id="tab-stack" class="tab-content">
+      <div class="two-col">
+        <div>
+          <div class="card">
+            <h2>Desktop Shell</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">Electron v42 <span class="item-meta done">macOS</span></div>
+                <div class="item-desc">Main process manages the app lifecycle, window creation, and spawns the Express server as a child process. Renderer runs in Chromium with Node integration disabled — all native calls go through the preload IPC bridge.</div>
+              </li>
+              <li>
+                <div class="item-title">electron-builder v26 <span class="item-meta">Build</span></div>
+                <div class="item-desc">Produces a .dmg for arm64 and x64. App ID: <code class="code-pill">co.copods.codeck</code>. The entire server directory is bundled as <code class="code-pill">extraResources</code> inside the .app package.</div>
+              </li>
+              <li>
+                <div class="item-title">Preload / IPC bridge <span class="item-meta done">Active</span></div>
+                <div class="item-desc">Exposes <code class="code-pill">getSources()</code>, <code class="code-pill">downloadFile()</code>, and <code class="code-pill">showInFolder()</code> to the renderer via <code class="code-pill">contextBridge</code>. No direct Node API access in the renderer.</div>
+              </li>
+            </ul>
+            <div class="pill-row">
+              <span class="pill purple">contextBridge</span>
+              <span class="pill purple">ipcRenderer</span>
+              <span class="pill purple">hardenedRuntime</span>
+              <span class="pill purple">entitlements.plist</span>
+            </div>
+          </div>
+
+          <div class="card cyan">
+            <h2>Backend Server</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">Node.js + Express v4.18 <span class="item-meta">Port 3001</span></div>
+                <div class="item-desc">ESM modules throughout (<code class="code-pill">type: "module"</code>). CORS open to <code class="code-pill">file://</code> and <code class="code-pill">localhost</code>. JSON body limit 10 MB to handle large transcripts.</div>
+              </li>
+              <li>
+                <div class="item-title">multer v1.4 <span class="item-meta">File upload</span></div>
+                <div class="item-desc">Handles multipart audio blobs on <code class="code-pill">POST /api/transcribe</code>. Temp files land in <code class="code-pill">/tmp/codeck-audio/</code> and are deleted after each transcription call.</div>
+              </li>
+              <li>
+                <div class="item-title">dotenv v16 <span class="item-meta">Config</span></div>
+                <div class="item-desc">All API keys and settings loaded from <code class="code-pill">server/.env</code> at startup. File is gitignored — never committed.</div>
+              </li>
+              <li>
+                <div class="item-title">uuid v9 <span class="item-meta">IDs</span></div>
+                <div class="item-desc">Used for unique meeting record IDs in <code class="code-pill">meetings.json</code>. Filenames use a shorter base-36 Date.now() suffix instead.</div>
+              </li>
+            </ul>
+            <div class="pill-row">
+              <span class="pill">ESM modules</span>
+              <span class="pill">node --watch</span>
+              <span class="pill">CORS: file://</span>
+            </div>
+          </div>
+
+          <div class="card amber">
+            <h2>Presentation Layer</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">pptxgenjs v3.12 <span class="item-meta done">Active</span></div>
+                <div class="item-desc">Generates .pptx programmatically. Uses <code class="code-pill">~/.codeck/template.pptx</code> as the master for brand colours and fonts. Slide layouts, cover, overview, needs, and closing slides are built via its API.</div>
+              </li>
+              <li>
+                <div class="item-title">deckType + labels system <span class="item-meta done">Active</span></div>
+                <div class="item-desc">AI returns a <code class="code-pill">deckType</code> and a <code class="code-pill">labels</code> object with headings per slide. Builder reads these instead of hardcoded strings — so an interview deck says "Interview Overview" not "Our Understanding".</div>
+              </li>
+              <li>
+                <div class="item-title">Unique filename per run <span class="item-meta done">Active</span></div>
+                <div class="item-desc">Format: <code class="code-pill">YYYY-MM-DD_client-slug_xxxxx.pptx</code> where <code class="code-pill">xxxxx</code> is a 5-char base-36 <code class="code-pill">Date.now()</code> suffix. Prevents overwrites even for the same client on the same day.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="card green">
+            <h2>Audio Capture</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">Web Audio API <span class="item-meta done">Active</span></div>
+                <div class="item-desc">An <code class="code-pill">AudioContext</code> mixes the microphone MediaStream and the system audio stream into one destination node. The mixed output is then passed to MediaRecorder.</div>
+              </li>
+              <li>
+                <div class="item-title">getDisplayMedia() <span class="item-meta done">Active</span></div>
+                <div class="item-desc">Captures system audio: <code class="code-pill">{ audio: true, video: false }</code>. On macOS the screen-recording entitlement must be granted in the Info.plist. Used for meeting capture mode only.</div>
+              </li>
+              <li>
+                <div class="item-title">MediaRecorder API — restart loop <span class="item-meta done">Active</span></div>
+                <div class="item-desc">Encodes to WebM/Opus or WebM/PCM (browser-dependent). Restarts every 5 seconds via a Promise-based async loop. Each new recorder instance writes a complete WebM header — required for Whisper to accept the file.</div>
+              </li>
+            </ul>
+            <div class="highlight-box green">
+              <strong>Why restart instead of slicing chunks?</strong> WebM is a container format. Only the first <code class="code-pill">ondataavailable</code> chunk contains the header. Slicing raw chunks into separate Blobs produces headerless files that Whisper rejects as invalid media. Restarting the MediaRecorder ensures every 5-second blob is a complete, self-contained file.
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Calendar Integration</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">googleapis v173 <span class="item-meta done">Active</span></div>
+                <div class="item-desc">Google Calendar API via OAuth 2.0. Scope: <code class="code-pill">calendar.readonly</code>. Tokens persisted in <code class="code-pill">~/.codeck/google-tokens.json</code> and reused across app restarts.</div>
+              </li>
+              <li>
+                <div class="item-title">OAuth callback at localhost <span class="item-meta done">Active</span></div>
+                <div class="item-desc">Auth flow opens in the system browser. Redirect URI: <code class="code-pill">http://localhost:3001/api/calendar/callback</code>. After code exchange, tokens are saved and the tab can be closed.</div>
+              </li>
+              <li>
+                <div class="item-title">Event pre-fill <span class="item-meta done">Active</span></div>
+                <div class="item-desc">Selecting a calendar event pre-fills both the Meeting Title and Client Name fields. Client name is derived from external attendee email domains, excluding the user's own org domain.</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card rose">
+            <h2>Local Storage</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">~/.codeck/ <span class="item-meta">Data dir</span></div>
+                <div class="item-desc">All persistent data lives here. Override with <code class="code-pill">DATA_DIR</code> env var. Created on first server start if it doesn't exist.</div>
+              </li>
+              <li>
+                <div class="item-title">meetings.json <span class="item-meta">History</span></div>
+                <div class="item-desc">Append-only array of every analyzed meeting. Each record stores transcript, AI JSON, deck title, client name, date, and output file path.</div>
+              </li>
+              <li>
+                <div class="item-title">copods-profile.json <span class="item-meta">AI context</span></div>
+                <div class="item-desc">Scraped copods.co data injected into every proposal prompt: services, case studies, differentiators, engagement models, testimonials, stats, industries, notable clients.</div>
+              </li>
+              <li>
+                <div class="item-title">template.pptx <span class="item-meta">Brand</span></div>
+                <div class="item-desc">Master theme for all generated decks. Replace this file to instantly apply a new brand — colours, fonts, and layout update across all future generations.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════ FEATURES ═══════════════════════════ -->
+    <div id="tab-features" class="tab-content">
+      <div class="three-col">
+        <div class="card green">
+          <h2>Recording</h2>
+          <ul class="list-items">
+            <li>
+              <div class="item-title">Mic-only mode <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Records the user's microphone only. Useful for voice memos or interviews where system audio isn't needed. Requires only microphone permission.</div>
+            </li>
+            <li>
+              <div class="item-title">Meeting capture mode <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Mixes system audio + mic via Web Audio API. Captures both sides of a Google Meet, Zoom, or Teams call with no third-party recording software.</div>
+            </li>
+            <li>
+              <div class="item-title">Live transcript display <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Each 5-second segment is transcribed and appended immediately. Users see the transcript grow in real time — no need to wait for the recording to end.</div>
+            </li>
+            <li>
+              <div class="item-title">Stop &amp; review flow <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Stopping shows the full transcript in the review view. Users can edit the title and client name before generating the deck.</div>
+            </li>
+            <li>
+              <div class="item-title">Manual transcript paste <span class="item-meta done">Active</span></div>
+              <div class="item-desc">The transcript field is editable. Paste any external transcript (Zoom, Otter.ai, Fireflies…) and generate a deck without recording anything.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card cyan">
+          <h2>AI Analysis</h2>
+          <ul class="list-items">
+            <li>
+              <div class="item-title">Intent modal — 6 types <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Before generating, a chip-picker asks "What kind of presentation?". Each chip carries an explicit <code class="code-pill">deckType</code> directive injected at the top of the AI system prompt.</div>
+            </li>
+            <li>
+              <div class="item-title">Free-text intent override <span class="item-meta done">Active</span></div>
+              <div class="item-desc">A text field in the intent modal lets users add custom instructions on top of the chip selection — e.g. "Focus on pricing discussion and avoid technical deep-dive".</div>
+            </li>
+            <li>
+              <div class="item-title">Conditional profile injection <span class="item-meta done">Active</span></div>
+              <div class="item-desc">The Copods company profile (services, case studies, differentiators, engagement models, stats) is injected into the AI prompt <strong>only</strong> when the intent signals a proposal or pitch. Chips that include "Do NOT include" or "do not use the company" as part of their instruction (e.g. Interview Recap) hard-exclude the profile even if the word "Copods" appears elsewhere in the intent text. Default behavior (no chip selected) includes the profile.
+                <table style="margin-top:0.6rem;font-size:var(--font-size-sm);width:100%;border-collapse:collapse;">
+                  <thead>
+                    <tr><th style="text-align:left;padding:4px 8px;border-bottom:1px solid var(--border);">Intent / Selection</th><th style="text-align:center;padding:4px 8px;border-bottom:1px solid var(--border);">Profile injected</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:4px 8px;">Client Proposal chip</td><td style="text-align:center;padding:4px 8px;" class="good">✓ yes — pitch your services</td></tr>
+                    <tr><td style="padding:4px 8px;">Sales Pitch chip</td><td style="text-align:center;padding:4px 8px;" class="good">✓ yes — uses case studies</td></tr>
+                    <tr><td style="padding:4px 8px;">Project Kickoff chip</td><td style="text-align:center;padding:4px 8px;" class="bad">✗ no</td></tr>
+                    <tr><td style="padding:4px 8px;">Strategy Deck chip</td><td style="text-align:center;padding:4px 8px;" class="bad">✗ no</td></tr>
+                    <tr><td style="padding:4px 8px;">Status Update chip</td><td style="text-align:center;padding:4px 8px;" class="bad">✗ no</td></tr>
+                    <tr><td style="padding:4px 8px;">Interview Recap chip</td><td style="text-align:center;padding:4px 8px;" class="bad">✗ no — fixed</td></tr>
+                    <tr><td style="padding:4px 8px;">Free text "interview"</td><td style="text-align:center;padding:4px 8px;" class="bad">✗ no</td></tr>
+                    <tr><td style="padding:4px 8px;">Free text "proposal"</td><td style="text-align:center;padding:4px 8px;" class="good">✓ yes</td></tr>
+                    <tr><td style="padding:4px 8px;">No selection (default)</td><td style="text-align:center;padding:4px 8px;" class="good">✓ yes</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </li>
+            <li>
+              <div class="item-title">deckType gating <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Non-proposal decks have <code class="code-pill">whyCopods: null</code> and <code class="code-pill">engagementModel: null</code> enforced in the prompt rules. The Copods sales pitch never bleeds into an interview recap or status update.</div>
+            </li>
+            <li>
+              <div class="item-title">Dynamic slide labels <span class="item-meta done">Active</span></div>
+              <div class="item-desc">AI returns a <code class="code-pill">labels</code> object with cover, overview, needs, and closing headings matched to the deck type. Builder uses these verbatim.</div>
+            </li>
+            <li>
+              <div class="item-title">Provider-agnostic <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Same prompt and JSON schema across all four providers. Switching <code class="code-pill">AI_PROVIDER</code> in .env is the only change needed.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card amber">
+          <h2>PPT Generation</h2>
+          <ul class="list-items">
+            <li>
+              <div class="item-title">6 deck archetypes <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Client Proposal · Pitch Deck · Interview Recap · Project Kickoff · Strategy Deck · Status Update. Each drives a distinct slide structure and tone.</div>
+            </li>
+            <li>
+              <div class="item-title">Brand template theming <span class="item-meta done">Active</span></div>
+              <div class="item-desc">pptxgenjs reads <code class="code-pill">~/.codeck/template.pptx</code> as master. Replace this one file to instantly update colours, fonts, and background across all future decks.</div>
+            </li>
+            <li>
+              <div class="item-title">Unique filenames <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Every generation writes a new file. Format: <code class="code-pill">2025-06-28_client-name_a3b7f.pptx</code>. Never overwrites a previous version.</div>
+            </li>
+            <li>
+              <div class="item-title">Org branding via env <span class="item-meta done">Active</span></div>
+              <div class="item-desc"><code class="code-pill">ORG_NAME</code> and <code class="code-pill">ORG_TAGLINE</code> appear on cover and closing slides. Change these to white-label the app for a different org without touching code.</div>
+            </li>
+            <li>
+              <div class="item-title">Open in Finder <span class="item-meta done">Active</span></div>
+              <div class="item-desc">After generation, a button reveals the .pptx in the Finder output folder via Electron's IPC <code class="code-pill">showInFolder</code> bridge.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Calendar</h2>
+          <ul class="list-items">
+            <li>
+              <div class="item-title">Google Calendar OAuth <span class="item-meta done">Active</span></div>
+              <div class="item-desc">One-time browser auth. Tokens stored in <code class="code-pill">~/.codeck/google-tokens.json</code>. Read-only scope — app never modifies calendar data.</div>
+            </li>
+            <li>
+              <div class="item-title">Upcoming events list <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Shows next 10 events. Selecting one pre-fills both Meeting Title and Client Name before recording begins.</div>
+            </li>
+            <li>
+              <div class="item-title">Client name derivation <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Server inspects attendee emails, picks the first external domain (not the user's org). Falls back to the event summary as the title.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card rose">
+          <h2>Meeting History</h2>
+          <ul class="list-items">
+            <li>
+              <div class="item-title">Persistent log <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Every analyzed meeting appended to <code class="code-pill">~/.codeck/meetings.json</code>. History view shows all past sessions sorted by date.</div>
+            </li>
+            <li>
+              <div class="item-title">Detail view <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Click any history card to see the full transcript, AI summary, client details, and a Regenerate button for a new deck from the same transcript.</div>
+            </li>
+            <li>
+              <div class="item-title">Re-generate from history <span class="item-meta done">Active</span></div>
+              <div class="item-desc">Both the detail view and the history card have a Generate PPT button. Both open the intent modal — user picks a deck type and the saved transcript is re-analyzed.</div>
+            </li>
+            <li>
+              <div class="item-title">Inline title rename <span class="item-meta done">Active</span></div>
+              <div class="item-desc">A pencil icon next to the meeting title in the detail view opens an inline input. Saving sends a <code class="code-pill">PATCH /api/meetings/:id</code> to update <code class="code-pill">meetings.json</code> and updates the in-memory list — no re-fetch needed. Title persists across navigation via <code class="code-pill">meetingsDirty</code> flag: history only re-fetches when a new meeting is actually saved.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card cyan">
+          <h2>Transcription Options</h2>
+          <ul class="list-items">
+            <li>
+              <div class="item-title">Groq Whisper <span class="item-meta done">Default</span></div>
+              <div class="item-desc"><code class="code-pill">whisper-large-v3-turbo</code> via Groq REST. Fastest option — sub-second latency on Groq's LPU for a 5-second segment. Language: English.</div>
+            </li>
+            <li>
+              <div class="item-title">Gemini inline audio <span class="item-meta partial">When gemini</span></div>
+              <div class="item-desc">Gemini 2.0 Flash accepts base64 audio as inline data. Same API key covers both transcription and analysis — no separate transcription account needed.</div>
+            </li>
+            <li>
+              <div class="item-title">OpenAI Whisper-1 <span class="item-meta partial">When openai</span></div>
+              <div class="item-desc">OpenAI's original Whisper model via the audio.transcriptions endpoint. Accepts WebM directly.</div>
+            </li>
+            <li>
+              <div class="item-title">Claude — Groq fallback <span class="item-meta partial">When claude</span></div>
+              <div class="item-desc">Claude does not support audio input. When <code class="code-pill">AI_PROVIDER=claude</code>, transcription still uses Groq Whisper — both keys must be set.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════ CONFIG ═══════════════════════════ -->
+    <div id="tab-config" class="tab-content">
+      <div class="card">
+        <h2>Environment Variables — server/.env</h2>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr><th>Variable</th><th>Required</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code class="code-pill">AI_PROVIDER</code></td>
+                <td class="good">Yes</td>
+                <td><code class="code-pill">groq</code></td>
+                <td>Active provider for LLM analysis. Values: <code class="code-pill">groq</code> · <code class="code-pill">gemini</code> · <code class="code-pill">openai</code> · <code class="code-pill">claude</code>. Also controls which transcription path is used.</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">GROQ_API_KEY</code></td>
+                <td class="good">Always</td>
+                <td>—</td>
+                <td>Groq API key. Used for transcription (all modes) and LLM analysis when AI_PROVIDER=groq. Free tier available at console.groq.com.</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">GEMINI_API_KEY</code></td>
+                <td class="okay">If gemini</td>
+                <td>—</td>
+                <td>Google AI Studio key. Enables Gemini 2.0 Flash for analysis + Google Search grounding + inline audio transcription. aistudio.google.com</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">OPENAI_API_KEY</code></td>
+                <td class="okay">If openai</td>
+                <td>—</td>
+                <td>OpenAI API key. Enables GPT-4o with web_search_preview and Whisper-1 transcription. platform.openai.com — paid tier required.</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">ANTHROPIC_API_KEY</code></td>
+                <td class="okay">If claude</td>
+                <td>—</td>
+                <td>Anthropic key. Enables Claude Sonnet 4.6 with web_search tool. Transcription still uses Groq — GROQ_API_KEY must also be set. console.anthropic.com</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">GOOGLE_CLIENT_ID</code></td>
+                <td class="okay">Calendar</td>
+                <td>—</td>
+                <td>Google OAuth client ID for Calendar integration. Create at console.cloud.google.com with Calendar API enabled.</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">GOOGLE_CLIENT_SECRET</code></td>
+                <td class="okay">Calendar</td>
+                <td>—</td>
+                <td>Google OAuth secret. Add <code class="code-pill">http://localhost:3001/api/calendar/callback</code> as an authorized redirect URI in the Google Console.</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">ORG_NAME</code></td>
+                <td class="bad">No</td>
+                <td><code class="code-pill">Copods</code></td>
+                <td>Organisation name on every deck cover and in AI prompts as the presenter. Change to white-label the app.</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">ORG_TAGLINE</code></td>
+                <td class="bad">No</td>
+                <td>—</td>
+                <td>Tagline on the closing slide. E.g. "Partners in your digital journey".</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">OUTPUT_DIR</code></td>
+                <td class="bad">No</td>
+                <td><code class="code-pill">DATA_DIR/output</code></td>
+                <td>Override where generated .pptx files are saved. Set to <code class="code-pill">/Users/copods/output</code> for a visible home-directory folder — separate from DATA_DIR so meetings.json and tokens stay in ~/.codeck.</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">DATA_DIR</code></td>
+                <td class="bad">No</td>
+                <td><code class="code-pill">~/.codeck</code></td>
+                <td>Root directory for all runtime data: meetings.json, google-tokens.json, copods-profile.json, template.pptx.</td>
+              </tr>
+              <tr>
+                <td><code class="code-pill">PORT</code></td>
+                <td class="bad">No</td>
+                <td><code class="code-pill">3001</code></td>
+                <td>Express server port. The Electron renderer calls http://localhost:PORT for all API requests.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <div class="section-label">AI Provider Comparison</div>
+
+          <div class="card green">
+            <h2>Groq — Default</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">LLM model <span class="item-meta done">Active</span></div>
+                <div class="item-desc"><code class="code-pill">openai/gpt-oss-120b</code>. JSON mode enforced via <code class="code-pill">response_format: { type: 'json_object' }</code>. Temperature 0.4 for consistent structured output.</div>
+              </li>
+              <li>
+                <div class="item-title">Transcription model <span class="item-meta done">Active</span></div>
+                <div class="item-desc"><code class="code-pill">whisper-large-v3-turbo</code>. Fastest Whisper variant — optimised for Groq's LPU. Sub-second latency per 5-second segment. Language: English.</div>
+              </li>
+              <li>
+                <div class="item-title">Web search <span class="item-meta">None</span></div>
+                <div class="item-desc">LLaMA on Groq has no grounding tools. Content comes entirely from the transcript and Copods profile.</div>
+              </li>
+              <li>
+                <div class="item-title">Cost <span class="item-meta done">Free tier</span></div>
+                <div class="item-desc">Generous free tier with rate limits. Sufficient for regular internal Copods use with no billing required.</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card cyan">
+            <h2>Google Gemini</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">LLM model <span class="item-meta">gemini-2.0-flash</span></div>
+                <div class="item-desc">JSON mode via <code class="code-pill">responseMimeType: 'application/json'</code>. Faster and cheaper than Pro — sufficient for structured deck generation.</div>
+              </li>
+              <li>
+                <div class="item-title">Transcription <span class="item-meta">Inline audio</span></div>
+                <div class="item-desc">Audio sent as base64 inline data — no separate transcription step. Same model and same API key cover both.</div>
+              </li>
+              <li>
+                <div class="item-title">Web search <span class="item-meta done">Built-in</span></div>
+                <div class="item-desc">Google Search grounding via <code class="code-pill">tools: [{ googleSearch: {} }]</code>. Up to 3 topics searched per meeting. Source URLs captured from grounding metadata and stored in <code class="code-pill">webFindings</code>.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="card amber">
+            <h2>OpenAI GPT-4o</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">LLM model <span class="item-meta">gpt-4o</span></div>
+                <div class="item-desc">Responses API with <code class="code-pill">web_search_preview</code> tool. JSON extracted from message content block — Markdown fences stripped before parsing.</div>
+              </li>
+              <li>
+                <div class="item-title">Transcription <span class="item-meta">whisper-1</span></div>
+                <div class="item-desc">OpenAI's original Whisper via <code class="code-pill">audio.transcriptions.create()</code>. Accepts WebM audio natively. Slower than Groq Whisper.</div>
+              </li>
+              <li>
+                <div class="item-title">Web search <span class="item-meta done">Built-in</span></div>
+                <div class="item-desc">Real-time web results via <code class="code-pill">web_search_preview</code> tool — baked into the single analysis pass.</div>
+              </li>
+              <li>
+                <div class="item-title">Cost <span class="item-meta bad">Paid only</span></div>
+                <div class="item-desc">No free tier for GPT-4o via API. Billing must be enabled on platform.openai.com.</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card rose">
+            <h2>Anthropic Claude</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">LLM model <span class="item-meta">claude-sonnet-4-6</span></div>
+                <div class="item-desc">Messages API with <code class="code-pill">web_search_20250305</code> tool. JSON in text content blocks — Markdown fences stripped before parsing. Max tokens: 4096.</div>
+              </li>
+              <li>
+                <div class="item-title">Transcription <span class="item-meta partial">Groq fallback</span></div>
+                <div class="item-desc">Claude does not accept audio input. When <code class="code-pill">AI_PROVIDER=claude</code>, the transcription route still calls Groq Whisper — both <code class="code-pill">GROQ_API_KEY</code> and <code class="code-pill">ANTHROPIC_API_KEY</code> must be set.</div>
+              </li>
+              <li>
+                <div class="item-title">Web search <span class="item-meta done">Built-in</span></div>
+                <div class="item-desc">Native <code class="code-pill">web_search</code> tool populates <code class="code-pill">webFindings</code> in the JSON output automatically.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════ FUTURE ═══════════════════════════ -->
+    <div id="tab-future" class="tab-content">
+      <div class="two-col">
+        <div>
+          <div class="section-label">Near-Term Improvements</div>
+          <div class="card amber">
+            <h2>Short Horizon</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">Editable transcript before analysis <span class="pending-badge">Planned</span></div>
+                <div class="item-desc">Allow users to edit the auto-transcript in the review view to fix Whisper errors, remove filler words, or correct misattributed speech before hitting Generate.</div>
+              </li>
+              <li>
+                <div class="item-title">Transcription progress indicator <span class="pending-badge">Planned</span></div>
+                <div class="item-desc">Show a running word count or waveform animation during recording so users know each 5-second segment is being processed and not silently dropped.</div>
+              </li>
+              <li>
+                <div class="item-title">Whisper hallucination filter <span class="pending-badge">Planned</span></div>
+                <div class="item-desc">Post-process transcription output to strip common Whisper hallucinations — "Thank you for watching", "Subscribe", silence-padding phrases. Configurable word blocklist in .env.</div>
+              </li>
+              <li>
+                <div class="item-title">Provider fallback chain <span class="pending-badge">Planned</span></div>
+                <div class="item-desc">If the primary provider returns a rate-limit or server error, automatically retry with a configured secondary. E.g. Groq → Gemini → OpenAI. Chain order set in .env.</div>
+              </li>
+              <li>
+                <div class="item-title">Recording pause / resume <span class="pending-badge">Planned</span></div>
+                <div class="item-desc">A pause button that halts the 5-second loop without ending the session. Resume from where it left off — useful for bio breaks or off-record conversations mid-meeting.</div>
+              </li>
+              <li>
+                <div class="item-title">Meeting search &amp; filter in history <span class="pending-badge">Planned</span></div>
+                <div class="item-desc">Full-text search across saved transcripts and client names. Filter by deck type or date range. Currently the history list has no filtering at all.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-label">Bigger Features</div>
+          <div class="card cyan">
+            <h2>Future Capabilities</h2>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">Speaker diarization <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Identify who said what. Groq Whisper v3 supports word-level timestamps — could combine with speaker labels to produce "Client: …" vs "Copods: …" attribution in the deck.</div>
+              </li>
+              <li>
+                <div class="item-title">Real-time transcript streaming <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Open a WebSocket between renderer and server to stream partial results as each segment completes, rather than appending full-segment text in one shot.</div>
+              </li>
+              <li>
+                <div class="item-title">PDF export <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Generate a PDF alongside the PPTX via pptxgenjs export or LibreOffice headless. Useful for sharing with clients who don't have PowerPoint.</div>
+              </li>
+              <li>
+                <div class="item-title">Action item tracker <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Surface the <code class="code-pill">nextSteps</code> array from AI JSON as a persistent checklist. Track status across sessions. Optional email digest of open items.</div>
+              </li>
+              <li>
+                <div class="item-title">Multi-language transcription <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Whisper supports 99 languages. Add a language selector to the recording UI and pass the <code class="code-pill">language</code> param to the transcription API call.</div>
+              </li>
+              <li>
+                <div class="item-title">Auto deck-type detection <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Before showing the intent modal, run a lightweight classification on the first N words of the transcript to suggest the most likely deck type as the default chip selection.</div>
+              </li>
+              <li>
+                <div class="item-title">Cloud sync for history <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Optionally sync meetings.json to Supabase or Firebase so history is shared across devices or team members. Requires an auth layer.</div>
+              </li>
+              <li>
+                <div class="item-title">Org profile auto-refresh CLI <span class="pending-badge">Future</span></div>
+                <div class="item-desc">A CLI command to re-scrape copods.co and refresh <code class="code-pill">~/.codeck/copods-profile.json</code> so the AI prompt always uses up-to-date case studies and client lists.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Platform Integrations</h2>
+        <div class="three-col" style="margin-top:0.5rem;">
+          <div>
+            <div class="section-label" style="margin-bottom:0.4rem;">Communication</div>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">Slack <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Post meeting summary + next steps to a Slack channel after generation. Configurable Incoming Webhook URL in .env.</div>
+              </li>
+              <li>
+                <div class="item-title">Microsoft Teams <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Adaptive Card with summary and deck download link via Teams Incoming Webhook.</div>
+              </li>
+              <li>
+                <div class="item-title">Email (SMTP) <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Send the generated deck + summary to the client email address. Configurable SMTP credentials in .env.</div>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-label" style="margin-bottom:0.4rem;">Calendar &amp; Drive</div>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">Microsoft Outlook Calendar <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Microsoft Graph API as a second calendar provider — same OAuth flow, different scopes. Toggle in .env alongside Google Calendar.</div>
+              </li>
+              <li>
+                <div class="item-title">Google Drive upload <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Auto-upload .pptx to a configured Drive folder and return a shareable link. Needs Drive API scope added to the OAuth flow.</div>
+              </li>
+              <li>
+                <div class="item-title">Auto-attach deck to Calendar event <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Write the .pptx back to the Google Calendar event as an attachment after generation. Requires <code class="code-pill">calendar.events</code> write scope.</div>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-label" style="margin-bottom:0.4rem;">CRM &amp; Storage</div>
+            <ul class="list-items">
+              <li>
+                <div class="item-title">HubSpot deal sync <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Create or update a CRM deal with the meeting summary, client name, and next steps extracted from AI JSON. HubSpot API key in .env.</div>
+              </li>
+              <li>
+                <div class="item-title">Notion page sync <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Create a Notion page per meeting with the transcript, summary, and action items. Notion integration token in .env.</div>
+              </li>
+              <li>
+                <div class="item-title">Shareable deck links <span class="pending-badge">Future</span></div>
+                <div class="item-desc">Upload .pptx to a CDN or Google Drive and return a short shareable URL. One-click send-to-client without manually attaching a file.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════ ARCHITECTURE ═══════════════════════════ -->
+    <div id="tab-architecture" class="tab-content">
+
+      <!-- Orchestration flow diagram -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <h2>System Orchestration Flow</h2>
+        <div class="orch-wrap">
+
+          <!-- Input layer -->
+          <div class="orch-divider-label">Input</div>
+          <div class="orch-row">
+            <div class="orch-node green">Microphone</div>
+            <div class="orch-node green">System Audio (getDisplayMedia)</div>
+          </div>
+
+          <div class="orch-sep"><div class="orch-line"></div><span class="orch-arrow-txt">Web Audio API — AudioContext mix</span><div class="orch-line"></div></div>
+
+          <!-- Capture layer -->
+          <div class="orch-divider-label">Capture</div>
+          <div class="orch-row">
+            <div class="orch-node cyan wide">MediaRecorder · WebM/Opus · 5 s restart loop</div>
+          </div>
+
+          <div class="orch-sep"><div class="orch-line"></div><span class="orch-arrow-txt">audio blob every 5 s — FormData multipart</span><div class="orch-line"></div></div>
+
+          <!-- Transcription layer -->
+          <div class="orch-divider-label">Transcription — POST /api/transcribe</div>
+          <div class="orch-group">
+            <div class="orch-row">
+              <div class="orch-node green layer">Groq whisper-large-v3-turbo ✓ active</div>
+              <div class="orch-node amber layer">Gemini 2.0 Flash inline</div>
+              <div class="orch-node amber layer">OpenAI whisper-1</div>
+            </div>
+            <div style="font-size:9px;color:var(--text-secondary);margin-top:2px;">switched via AI_PROVIDER in server/.env</div>
+          </div>
+
+          <div class="orch-sep"><div class="orch-line"></div><span class="orch-arrow-txt">plain text → appended to running transcript</span><div class="orch-line"></div></div>
+
+          <!-- Intent layer -->
+          <div class="orch-divider-label">Intent Selection (UI)</div>
+          <div class="orch-row">
+            <div class="orch-node purple layer">Client Proposal</div>
+            <div class="orch-node purple layer">Project Kickoff</div>
+            <div class="orch-node purple layer">Strategy Deck</div>
+            <div class="orch-node purple layer">Sales Pitch</div>
+            <div class="orch-node purple layer">Status Update</div>
+            <div class="orch-node purple layer">Interview Recap</div>
+          </div>
+          <div style="font-size:9px;color:var(--text-secondary);margin-top:2px;text-align:center;">+ optional free-text override field</div>
+
+          <div class="orch-sep"><div class="orch-line"></div><span class="orch-arrow-txt">transcript + deckIntent + meetingTitle · Copods profile injected only for proposal/pitch intents</span><div class="orch-line"></div></div>
+
+          <!-- Analysis layer -->
+          <div class="orch-divider-label">AI Analysis — POST /api/analyze</div>
+          <div class="orch-group">
+            <div class="orch-row">
+              <div class="orch-node green layer">Groq gpt-oss-120b ✓ active</div>
+              <div class="orch-node amber layer">Gemini 2.0 Flash + Google Search</div>
+              <div class="orch-node amber layer">GPT-4o + web_search_preview</div>
+              <div class="orch-node rose layer">Claude Sonnet 4.6 + web_search</div>
+            </div>
+            <div style="font-size:9px;color:var(--text-secondary);margin-top:2px;">JSON mode enforced · returns deckType, labels, clientNeeds, proposedSolutions, nextSteps</div>
+          </div>
+
+          <div class="orch-sep"><div class="orch-line"></div><span class="orch-arrow-txt">structured JSON — deckType · labels · content · nextSteps</span><div class="orch-line"></div></div>
+
+          <!-- Generation layer -->
+          <div class="orch-divider-label">PPTX Generation — POST /api/generate</div>
+          <div class="orch-group">
+            <div class="orch-row">
+              <div class="orch-node cyan layer">pptxgenjs v3.12</div>
+              <div class="orch-node amber layer">~/.codeck/template.pptx</div>
+              <div class="orch-node purple layer">deckType + labels → slide headings</div>
+            </div>
+          </div>
+
+          <div class="orch-sep"><div class="orch-line"></div><span class="orch-arrow-txt">writes file · unique base-36 suffix per run</span><div class="orch-line"></div></div>
+
+          <!-- Output layer -->
+          <div class="orch-divider-label">Output</div>
+          <div class="orch-row">
+            <div class="orch-node green wide">~/output/YYYY-MM-DD_slug_xxxxx.pptx</div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:6px;">
+            <div class="orch-node cyan layer">meetings.json ← record saved</div>
+            <div class="orch-node amber layer">Finder revealed via IPC</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card cyan">
+          <h2>Project File Structure</h2>
+          <div class="folder-tree"><span class="dir">Copitch/</span>
+├── <span class="dir">electron/</span>                    <span class="cm">Desktop shell</span>
+│   ├── <span class="hl">main.js</span>               <span class="cm">App lifecycle, server spawn, window</span>
+│   ├── <span class="file">preload.js</span>            <span class="cm">IPC bridge — getSources, downloadFile, showInFolder</span>
+│   └── <span class="dir">renderer/</span>
+│       ├── <span class="hl">app.js</span>            <span class="cm">All UI logic — recording, API calls, history</span>
+│       ├── <span class="file">index.html</span>        <span class="cm">Views, intent modal (6 chips), CSP headers</span>
+│       └── <span class="file">styles.css</span>        <span class="cm">Modal, chip, card, overlay styles</span>
+│
+├── <span class="dir">server/</span>                     <span class="cm">Express backend — ESM, port 3001</span>
+│   ├── <span class="file">index.js</span>              <span class="cm">App bootstrap, route mounting, data dir init</span>
+│   ├── <span class="file">.env</span>                  <span class="cm">All API keys — gitignored, never committed</span>
+│   ├── <span class="dir">routes/</span>
+│   │   ├── <span class="hl">ai.js</span>             <span class="cm">POST /api/analyze — transcript → AI JSON</span>
+│   │   ├── <span class="hl">transcribe.js</span>     <span class="cm">POST /api/transcribe — audio blob → text</span>
+│   │   ├── <span class="hl">pptx.js</span>           <span class="cm">POST /api/generate — AI JSON → .pptx file</span>
+│   │   ├── <span class="file">calendar.js</span>       <span class="cm">Google Calendar OAuth + events list</span>
+│   │   └── <span class="file">files.js</span>          <span class="cm">GET/POST/PATCH meetings + GET /api/files</span>
+│   └── <span class="dir">lib/</span>
+│       ├── <span class="hl">prompt.js</span>         <span class="cm">buildProposalPrompt() — conditional profile injection per intent</span>
+│       ├── <span class="hl">builder.js</span>        <span class="cm">buildPresentation() — pptxgenjs deck assembly</span>
+│       └── <span class="dir">providers/</span>
+│           ├── <span class="grn">groq.js</span>       <span class="cm">gpt-oss-120b + whisper-large-v3-turbo ✓ active</span>
+│           ├── <span class="amb">gemini.js</span>     <span class="cm">gemini-2.0-flash + Google Search grounding</span>
+│           ├── <span class="amb">openai.js</span>     <span class="cm">gpt-4o + whisper-1 + web_search_preview</span>
+│           └── <span class="amb">claude.js</span>     <span class="cm">claude-sonnet-4-6 + web_search tool</span>
+│
+└── <span class="dir">~/.codeck/</span>                  <span class="cm">Runtime data — not in repo</span>
+    ├── <span class="file">meetings.json</span>         <span class="cm">All saved meeting records (append-only)</span>
+    ├── <span class="file">copods-profile.json</span>   <span class="cm">Scraped copods.co data for AI prompts</span>
+    ├── <span class="file">google-tokens.json</span>    <span class="cm">Persisted Google OAuth tokens</span>
+    ├── <span class="file">template.pptx</span>         <span class="cm">Brand master — replace to retheme all decks</span>
+    └── <span class="dir">output/</span>               <span class="cm">Generated .pptx files</span></div>
+        </div>
+
+        <div>
+          <div class="card">
+            <h2>API Routes</h2>
+            <div style="overflow-x:auto;">
+              <table>
+                <thead>
+                  <tr><th>Method</th><th>Route</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="item-meta done">POST</span></td>
+                    <td><code class="code-pill">/api/analyze</code></td>
+                    <td>Transcript + deckIntent + meetingTitle → active AI provider → structured JSON for PPT.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta done">POST</span></td>
+                    <td><code class="code-pill">/api/transcribe</code></td>
+                    <td>Multipart audio blob → Groq Whisper / Gemini / OpenAI Whisper-1 → plain text. Temp file deleted after call.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta done">POST</span></td>
+                    <td><code class="code-pill">/api/generate</code></td>
+                    <td>AI JSON (meetingData) → pptxgenjs → writes .pptx to output dir → returns filename + path.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta">GET</span></td>
+                    <td><code class="code-pill">/api/files</code></td>
+                    <td>Lists all .pptx files in the output directory. Used by the history view.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta">GET</span></td>
+                    <td><code class="code-pill">/api/calendar/events</code></td>
+                    <td>Returns next 10 Google Calendar events. Requires valid tokens in google-tokens.json.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta">GET</span></td>
+                    <td><code class="code-pill">/api/calendar/auth</code></td>
+                    <td>Initiates Google OAuth — redirects to Google's consent screen in the system browser.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta">GET</span></td>
+                    <td><code class="code-pill">/api/calendar/callback</code></td>
+                    <td>OAuth redirect target. Exchanges auth code for tokens, saves to disk.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta">GET</span></td>
+                    <td><code class="code-pill">/api/provider</code></td>
+                    <td>Returns active provider name, LLM model, and transcription model. Used for status display.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta">GET</span></td>
+                    <td><code class="code-pill">/api/config</code></td>
+                    <td>Returns <code class="code-pill">{ provider: 'groq' }</code>. Lightweight config fetch on renderer startup.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta">GET</span></td>
+                    <td><code class="code-pill">/api/health</code></td>
+                    <td>Returns <code class="code-pill">{ status: 'ok' }</code>. Electron main process polls this before showing the window.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta done">GET</span></td>
+                    <td><code class="code-pill">/api/meetings</code></td>
+                    <td>Returns full meetings.json array sorted by date descending. History view source.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta done">POST</span></td>
+                    <td><code class="code-pill">/api/meetings</code></td>
+                    <td>Appends a new meeting record to meetings.json after recording + analysis. Sets <code class="code-pill">meetingsDirty=true</code> in the renderer to trigger a re-fetch on next history view.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="item-meta done">PATCH</span></td>
+                    <td><code class="code-pill">/api/meetings/:id</code></td>
+                    <td>Updates <code class="code-pill">meetingTitle</code> or <code class="code-pill">clientName</code> for a single meeting in-place. Used by the inline title rename in the detail view — no full re-fetch required.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card amber">
+            <h2>AI JSON Schema</h2>
+            <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:0.7rem;">Every provider returns this same structure. The builder reads all fields. Non-proposal decks must have <code class="code-pill">whyCopods</code> and <code class="code-pill">engagementModel</code> set to null.</p>
+            <pre class="code-block"><span class="k">{</span>
+  <span class="s">"deckType"</span>:         <span class="c">// proposal | interview | kickoff | strategy | status | other</span>
+  <span class="s">"labels"</span>: <span class="k">{</span>
+    <span class="s">"cover"</span>:         <span class="c">// ALL-CAPS label on cover — e.g. CLIENT PROPOSAL, INTERVIEW RECAP</span>
+    <span class="s">"overview"</span>:      <span class="c">// Slide 2 heading</span>
+    <span class="s">"needs"</span>:         <span class="c">// Slide 3 heading</span>
+    <span class="s">"closing"</span>:       <span class="c">// Closing slide — use \n for line break</span>
+  <span class="k">}</span>,
+  <span class="s">"orgName"</span>:          <span class="c">// Always "Copods" (or ORG_NAME env value)</span>
+  <span class="s">"clientName"</span>:       <span class="c">// Person / company the meeting is ABOUT — never the platform</span>
+  <span class="s">"clientIndustry"</span>:   <span class="c">// Their domain / sector</span>
+  <span class="s">"meetingDate"</span>:      <span class="c">// ISO 8601</span>
+  <span class="s">"deckTitle"</span>:        <span class="c">// Title on the cover slide — must match meetingTitle if provided</span>
+  <span class="s">"executiveSummary"</span>: <span class="c">// 2-3 sentences matching the deckType purpose</span>
+  <span class="s">"clientNeeds"</span>:      <span class="c">// [{ title, description }]</span>
+  <span class="s">"proposedSolutions"</span>:<span class="c">// [{ title, subtitle, keyPoints[], stat }]</span>
+  <span class="s">"whyCopods"</span>:        <span class="c">// null for non-proposal — or { keyPoints[], relevantCaseStudy }</span>
+  <span class="s">"engagementModel"</span>:  <span class="c">// null for non-proposal — or { name, description, phases[] }</span>
+  <span class="s">"nextSteps"</span>:        <span class="c">// [{ item, owner, dueDate }]</span>
+  <span class="s">"webFindings"</span>:      <span class="c">// [{ topic, query, summary, sources[] }] — from web search providers</span>
+<span class="k">}</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Codeck · Copods internal tool · Electron v42 · Groq Whisper + LLaMA · pptxgenjs · June 2025
+  </footer>
+
+  <script>
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('tab-' + id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

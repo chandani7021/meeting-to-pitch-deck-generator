@@ -1,0 +1,13 @@
+node_modules/
+client/node_modules/
+server/node_modules/
+server/.env
+client/dist/
+dist/
+*.pptx
+.DS_Store
+server/.env.backup*
+server/.env.local
+*.dmg
+*.zip
+*.blockmap

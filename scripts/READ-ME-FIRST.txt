@@ -1,0 +1,39 @@
+Codeck — first run
+==================
+
+Codeck runs entirely on your own Mac. Nothing you record is sent anywhere.
+Because of that, the speech and language models have to live on this machine,
+so there is a one-time setup step.
+
+1. Drag Codeck.app to your Applications folder.
+
+2. macOS will refuse to open it, because this build is not signed by Apple.
+   Open Terminal and run, exactly:
+
+       xattr -dr com.apple.quarantine /Applications/Codeck.app
+
+3. Still in Terminal, run the setup script from this disk image:
+
+       bash "/Volumes/Codeck 1.0.0/codeck-setup.sh"
+
+   This downloads about 2.5 GB of models. It takes a while, needs the network
+   once, and is safe to re-run. Afterwards this Mac can stay offline forever.
+
+4. Open Codeck. Go to Settings — every item should have a green tick. Anything
+   still missing is listed there with the exact command to fix it.
+
+5. Grant two permissions in System Settings -> Privacy & Security, then
+   reopen Codeck:
+
+       Microphone        - to record your own voice
+       Screen Recording  - to capture meeting audio from Zoom / Meet / Teams
+
+   The first time you open the meeting list, macOS will also ask to let Codeck
+   control the Calendar app. That is how it reads today's meetings locally.
+
+Keep the model server running while you use Codeck. If Settings says the model
+runtime is not running, start it with:
+
+    ollama serve
+
+Questions: ask whoever sent you this build.

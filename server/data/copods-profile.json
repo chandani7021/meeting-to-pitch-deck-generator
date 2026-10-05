@@ -1,0 +1,411 @@
+{
+  "_source": "Scraped from copods.co (join-us, about-us, practices, services, testimonials, work/case-studies) — 2026-07-28",
+  "company": {
+    "name": "Copods",
+    "tagline": "A steadfast belief in the power of tangible outcomes",
+    "description": "Copods is a UX design and software development studio (IT consulting and product design services firm) that helps organizations build digital products and change how users interact with technology. Rather than chasing abstract metrics, Copods focuses on concrete results that make a real difference in the lives of clients, customers, and communities.",
+    "leadership": [
+      { "name": "Anish Bhuwania", "title": "CEO & Co-founder" },
+      { "name": "Sumin Shah", "title": "UX Head & Co-founder" },
+      { "name": "Kamlesh Munot", "title": "Creative Head & Co-founder" }
+    ],
+    "stats": {
+      "projectsDelivered": "150+",
+      "domainsAndPractices": "30+",
+      "attritionRate": "0%",
+      "valuationIncrease": "200% valuation increase across 10 startups",
+      "timeToMarket": "50% faster time-to-market acceleration",
+      "revenueGenerated": "$10M new revenue generated over 5 years"
+    }
+  },
+  "practices": [
+    {
+      "name": "Start",
+      "description": "We co-pilot with startups from ideation, market validation, to launching a relevant MVP",
+      "includes": [
+        "MVP strategy refinement and discovery",
+        "Primary narrative development with UX foundation",
+        "Market validation through customer endorsement",
+        "Minimum viable product development",
+        "Product deployment and engagement monitoring",
+        "Metrics analysis and statistical evidence collection",
+        "Investor pitch-deck creation and investor identification",
+        "Co-pitching support for funding rounds"
+      ],
+      "deliverables": "Validated MVP, investor pitch materials, market validation data, and deployment-ready product"
+    },
+    {
+      "name": "Scale",
+      "description": "We accelerate your product design & development lifecycle with our experience design and full-stack development expertise",
+      "includes": [
+        "UX design team expansion",
+        "Visual design team scaling",
+        "Frontend engineering extension",
+        "Backend engineering extension",
+        "Data and AI engineering support",
+        "Quality engineering support"
+      ],
+      "deliverables": "Extended team capacity, accelerated development cycles, enhanced design systems"
+    },
+    {
+      "name": "Transform",
+      "description": "We streamline digital touch-points to enrich your customer experience, for growth sustenance",
+      "includes": [
+        "Experience discovery and transformation strategy",
+        "Omni-channel design and engineering",
+        "Product experience modernization",
+        "Customer onboarding and conversion optimization",
+        "Design and engineering system development",
+        "Performance analytics and optimization",
+        "Accessibility compliance",
+        "Third-party integrations",
+        "AI and prompt engineering"
+      ],
+      "deliverables": "Modernized customer experiences, integrated systems, performance improvements, accessibility compliance"
+    }
+  ],
+  "services": {
+    "research": [
+      "Surveys",
+      "Stakeholder workshops",
+      "User interviews",
+      "Contextual inquiry",
+      "Usability testing",
+      "Usability audit",
+      "A/B testing"
+    ],
+    "design": [
+      "Mind mapping",
+      "User personas",
+      "User journey mapping",
+      "Storyboarding",
+      "Information architecture design",
+      "Navigation system design",
+      "Interaction design",
+      "Visual experience design",
+      "Micro-experience design",
+      "Accessibility design",
+      "Design systems",
+      "Design QA"
+    ],
+    "development": [
+      "Front-end engineering",
+      "API development",
+      "Backend engineering",
+      "Software re-engineering",
+      "Cloud architecture",
+      "AI & prompt engineering",
+      "Accessibility engineering",
+      "Web applications",
+      "Mobile applications",
+      "Custom applications",
+      "SaaS applications"
+    ],
+    "marketingBranding": [
+      "Brand identity",
+      "Brand strategy",
+      "Website design",
+      "Website development",
+      "CMS development & integration",
+      "Stationery",
+      "Editorial + layout",
+      "Packaging",
+      "Marketing materials",
+      "Wayfinding + signage",
+      "Illustration",
+      "Art direction",
+      "Social media strategy",
+      "Social media content"
+    ]
+  },
+  "techStack": {
+    "experienceDesign": ["Figma", "Adobe Creative Cloud", "Adobe XD", "InVision", "Sketch"],
+    "experienceEngineering": ["HTML", "JavaScript", "CSS", "React", "React Native", "MUI"]
+  },
+  "engagementModels": [
+    {
+      "name": "Start",
+      "description": "Co-pilot with startups from ideation, market validation, to launching a relevant MVP",
+      "deliverables": [
+        "MVP strategy & discovery",
+        "Market validation",
+        "MVP build & deployment",
+        "Investor pitch-deck support"
+      ]
+    },
+    {
+      "name": "Scale",
+      "description": "Accelerate product design & development lifecycle with experience design and full-stack development expertise",
+      "deliverables": [
+        "UX & visual design team extension",
+        "Frontend / backend engineering extension",
+        "Data & AI engineering support",
+        "Quality engineering support"
+      ]
+    },
+    {
+      "name": "Transform",
+      "description": "Streamline digital touch-points to enrich customer experience for growth sustenance",
+      "deliverables": [
+        "Experience discovery & transformation strategy",
+        "Omni-channel design and engineering",
+        "Design & engineering systems",
+        "Accessibility & performance optimization"
+      ]
+    }
+  ],
+  "differentiators": [
+    "Design-led development with strong ownership",
+    "Rapid team integration and leadership attention from start to finish",
+    "Domain expertise across 30+ industries",
+    "Zero attrition — same team throughout the engagement",
+    "150+ projects delivered with concrete, measurable outcomes"
+  ],
+  "notableClients": [
+    "Upstox", "PhonePe", "AnviLogic", "Kristal", "ThroughPut", "Blakthumb",
+    "Bain & Company", "CloudLex", "Hitachi Security Systems", "PTC", "Shoptimize"
+  ],
+  "industries": [
+    "Fintech", "Banking & Wealth Management", "Cybersecurity", "E-Commerce",
+    "Manufacturing & Supply Chain", "SaaS / Product Analytics", "Healthcare"
+  ],
+  "testimonials": [
+    { "quote": "Copods has been an amazing partner in our journey to improve our customer experience with a modern UI design, and have been instrumental in ensuring that we continue to implement UX best practices with usability and simplicity top of mind.", "name": "", "title": "Head of Product", "company": "AnviLogic" },
+    { "quote": "At Bain, Copods' expertise helped us think outside of already existing layout and propose new product structure.", "name": "", "title": "Manager, Product Management", "company": "Bain & Company" },
+    { "quote": "Copods have exceeded expectations around speed and quality of delivery.", "name": "", "title": "CEO & Co-founder", "company": "Blakthumb" },
+    { "quote": "For us, they're not just an agency. They're an extension of our product and marketing teams.", "name": "", "title": "Marketing Head", "company": "CloudLex" },
+    { "quote": "We have had a great experience working with them in reshaping the UX of our flagship product.", "name": "", "title": "Sr. Technical Director", "company": "Hitachi Security Systems" },
+    { "quote": "The designs have been refreshing and helped us get on track to achieve our product goals.", "name": "", "title": "Director, Products", "company": "Kristal" },
+    { "quote": "I found the team to be knowledgeable in the area they operate in, extremely patient and flexible.", "name": "", "title": "Senior Director, R&D", "company": "PTC" },
+    { "quote": "We have enjoyed partnering with Copods to help fill our UI and React Native engineering asks.", "name": "", "title": "Engineering Head", "company": "PhonePe" },
+    { "quote": "We have learnt a lot from Copods including that UX goes beyond 'look and feel.'", "name": "", "title": "Co-founder & CEO", "company": "Shoptimize" },
+    { "quote": "I recommend Copods unreservedly for UX design and UI engineering services.", "name": "Shirish Deodhar", "title": "Tech Entrepreneur (GullyBuy, Sapience Analytics, and others)", "company": "" },
+    { "quote": "Copods has been an integral part of ThroughPut building its User Experience since early stages.", "name": "", "title": "Chief Technology Officer", "company": "ThroughPut" },
+    { "quote": "The design team from Copods was able to ramp up quickly to contribute and make an impact.", "name": "", "title": "VP, Head of Design", "company": "Upstox" }
+  ],
+  "caseStudies": [
+    {
+      "id": "cybersecurity",
+      "client": "AnviLogic",
+      "industry": "Cybersecurity",
+      "title": "AI Co-Pilot for Cybersecurity Threat Detection",
+      "description": "SOC analysts needed excessive time to deploy protections against threats relevant to their organization and industry. Copods redesigned the detection-engineering workflow around a no-code protection builder and an AI co-pilot.",
+      "audience": ["SOC (Security Operations Center) analysts", "Detection engineers"],
+      "goals": [
+        "Exponentially decrease protection deployment time",
+        "Democratize the cybersecurity protection process by lowering the barrier to entry",
+        "Modernize the visual language and component system"
+      ],
+      "solution": [
+        "No-code protection builder with drag-and-drop interface",
+        "1-click protection deployment for critical breach situations",
+        "Co-Pilot AI assistant for event explanation, report writing, hunt assistance, and protection building",
+        "Redesigned navigation structure and optimized task flows",
+        "Standardized design system with Storybook components; migrated UI library from MUI4 to MUI5"
+      ],
+      "keyMetrics": [
+        { "label": "Efficiency gain", "value": "40% increase in efficiency" },
+        { "label": "Protection creation speed", "value": "3x faster" },
+        { "label": "Error rate", "value": "25% reduction" },
+        { "label": "Deployment speed", "value": "5x faster" },
+        { "label": "Component coverage", "value": "300% increase" },
+        { "label": "Front-end implementation speed", "value": "3x faster" },
+        { "label": "Performance", "value": "up to 30% increase" }
+      ],
+      "impact": [
+        { "label": "Efficiency", "value": "40% increase through workflow optimization" },
+        { "label": "Deployment Speed", "value": "5x faster protection deployment" },
+        { "label": "Revenue Impact", "value": "$20M sales revenue increase (2024)" }
+      ],
+      "results": "40% efficiency gain; 3x faster protection creation; 5x faster deployment; $20M sales revenue increase in 2024",
+      "features": [
+        { "name": "No-code protection builder" },
+        { "name": "1-click deployment" },
+        { "name": "AI detection-engineering co-pilot" },
+        { "name": "Design system & component library" }
+      ],
+      "solutionSummary": "No-code builder + AI co-pilot",
+      "techStack": ["React", "MUI5", "Design System / Storybook"],
+      "testimonial": { "quote": "Copods has been an amazing partner in our journey to improve our customer experience with a modern UI design, and have been instrumental in ensuring that we continue to implement UX best practices with usability and simplicity top of mind.", "title": "Head of Product" }
+    },
+    {
+      "id": "wealth-management",
+      "client": "Kristal",
+      "industry": "Banking & Finance (Private Wealth Management)",
+      "title": "CRM Redesign for Private Wealth Management",
+      "description": "Kristal's CRM tool needed a redesign to help financial relationship managers better initiate and manage clients' investment journeys using advisory algorithms.",
+      "audience": ["Financial relationship managers"],
+      "goals": [
+        "Improve product strategy through user pain-point identification",
+        "Enhance tool accessibility and streamline onboarding",
+        "Create engaging investment-exploration experiences",
+        "Future-proof the platform architecture"
+      ],
+      "solution": [
+        "Right-hand navigation panel for recurring administrative tasks",
+        "Streamlined onboarding with progressive progress indicator",
+        "AI-powered exploratory page with personalized product recommendations",
+        "Enhanced data visualization and interaction patterns",
+        "Redesigned information architecture and navigation structure",
+        "Standardized design system for code reusability"
+      ],
+      "keyMetrics": [
+        { "label": "Sales revenue", "value": "40% increase in 2024" },
+        { "label": "User journey efficiency", "value": "3x more efficient" }
+      ],
+      "impact": [
+        { "label": "Revenue Growth", "value": "40% increase in sales revenue in 2024" },
+        { "label": "Journey Efficiency", "value": "3x more efficient path to key tools" }
+      ],
+      "results": "40% sales revenue increase in 2024; 3x more efficient user journey",
+      "features": [
+        { "name": "Progressive onboarding" },
+        { "name": "AI-powered recommendations" },
+        { "name": "Redesigned navigation & IA" },
+        { "name": "Reusable design system" }
+      ],
+      "solutionSummary": "UX redesign + design system",
+      "techStack": ["Design System", "Data Visualization"],
+      "testimonial": { "quote": "The efforts that the team put in understanding our business, users and use cases is commendable. The designs have been refreshing and helped us get on track to achieve our product goals.", "title": "Director, Products" }
+    },
+    {
+      "id": "supply-chain-management",
+      "client": "ThroughPut",
+      "industry": "Manufacturing & Supply Chain",
+      "title": "MVP for a Supply Chain Optimization Platform",
+      "description": "Manufacturing organizations needed to optimize supply-chain processes, identify bottlenecks, and accelerate operational decision-making. Copods layered intuitive UI/UX on top of ThroughPut's Supply Chain Optimization AI engine.",
+      "audience": ["Supply chain professionals and decision-makers in manufacturing operations"],
+      "goals": [
+        "Release an MVP enabling bottleneck tracking and operational agility for early market adoption",
+        "Give users a single source of truth for end-to-end supply-chain visibility"
+      ],
+      "solution": [
+        "ABC-XYZ Matrix for demand sensing and planning across manufacturing, logistics, and finance",
+        "Outbound/Inbound Material Flow visualization using Sankey diagrams and maps",
+        "Critical Constraint Resource (CCR) analysis to optimize manufacturing parameters"
+      ],
+      "keyMetrics": [
+        { "label": "Efficiency", "value": "up to 2x improvement" }
+      ],
+      "impact": [
+        { "label": "Decision Speed", "value": "faster decision-making across the supply chain" },
+        { "label": "Efficiency", "value": "up to 2x improvement via AI recommendations and forecasts" },
+        { "label": "Scalability", "value": "scalable across transport, logistics, retail, ports, defense, food & beverage" }
+      ],
+      "results": "Up to 2x efficiency improvement; single source of truth for end-to-end supply-chain visibility",
+      "features": [
+        { "name": "ABC-XYZ demand-sensing matrix" },
+        { "name": "Material flow Sankey visualization" },
+        { "name": "CCR analysis" }
+      ],
+      "solutionSummary": "Data visualization + AI-driven supply chain MVP",
+      "techStack": ["Sankey / data-viz components", "AI recommendation engine"],
+      "testimonial": { "quote": "Copods has been a great partner for layering on intuitive UI/UX on top of ThroughPut's pioneering Supply Chain Optimization AI-Engine to help our clients achieve greater results with a leading-edge product and user-journey.", "title": "Chief Technology Officer" }
+    },
+    {
+      "id": "customer-feedback-analytics",
+      "client": "Enterpret",
+      "clientConfirmed": false,
+      "industry": "SaaS / Product Analytics",
+      "title": "Customer Feedback & Analytics Platform Redesign",
+      "description": "Product builders struggled to understand the reasoning behind customer feedback and lacked tools to prioritize issues efficiently; search and query were the most-complained-about part of the product.",
+      "audience": ["Product builders and teams analyzing customer feedback at scale"],
+      "goals": [
+        "Help product teams comprehend customer feedback quickly",
+        "Establish a clear prioritization framework for customer concerns",
+        "Fix the highest-complaint search and query experience"
+      ],
+      "solution": [
+        "Chart builder for visualizing feedback across metrics with comparative analysis",
+        "Revamped search and query builder",
+        "Customizable dashboards and subscription workflows for feedback monitoring",
+        "Support for multiple feedback types: audio, forum threads, support conversations, file uploads",
+        "AI-powered chatbot for natural-language queries with inspectable, user-modifiable responses",
+        "Multimodal AI outputs (text, charts, records) and cross-touchpoint feedback summarization"
+      ],
+      "keyMetrics": [
+        { "label": "Chart builder adoption", "value": "2nd most-used feature within 2 months" },
+        { "label": "AI workflow adoption", "value": "40% of users switched to AI-driven workflows" }
+      ],
+      "impact": [
+        { "label": "Feature Adoption", "value": "Chart builder became the 2nd most-used feature within 2 months" },
+        { "label": "Support Load", "value": "Search revamp eliminated the platform's top user complaint" },
+        { "label": "AI Adoption", "value": "40% of users moved to AI-driven workflows" }
+      ],
+      "results": "Chart builder: 2nd most-used feature within 2 months; 40% of users adopted AI-driven workflows",
+      "features": [
+        { "name": "Chart builder" },
+        { "name": "AI chatbot for feedback queries" },
+        { "name": "Revamped search & query builder" },
+        { "name": "Customizable dashboards" }
+      ],
+      "solutionSummary": "AI-powered analytics + search/query redesign",
+      "techStack": ["Multimodal AI", "Data visualization"],
+      "testimonial": null
+    },
+    {
+      "id": "fintech-platform",
+      "client": "Deciml",
+      "clientConfirmed": false,
+      "industry": "Fintech / Investment Services",
+      "title": "Simplified Investment Platform Design",
+      "description": "Deciml needed to present complex investment intelligence in a clear, user-friendly way that made financial planning more delightful, backed by a distinctive visual identity.",
+      "audience": ["Investment-platform users seeking simplified investment solutions"],
+      "goals": [
+        "Make financial planning more delightful through intuitive design",
+        "Build a distinctive, cohesive visual identity"
+      ],
+      "solution": [
+        "Core application flow design: onboarding, dashboard, investment and transaction screens",
+        "Custom visual language and multi-tiered illustration system (pictograms, icons, full illustrations)",
+        "Comprehensive design system covering typography, color, and illustration guidelines"
+      ],
+      "keyMetrics": [],
+      "impact": [],
+      "results": "Delivered a distinctive, cohesive design system and simplified core investment flows",
+      "features": [
+        { "name": "Onboarding flow" },
+        { "name": "Investment dashboard" },
+        { "name": "Illustration system" }
+      ],
+      "solutionSummary": "UX design + visual identity system",
+      "techStack": ["Design System"],
+      "testimonial": null
+    },
+    {
+      "id": "e-commerce-order-management",
+      "client": "Anchanto",
+      "clientConfirmed": false,
+      "industry": "E-Commerce & Logistics",
+      "title": "Order Management Platform Redesign",
+      "description": "The platform had a convoluted order-processing system with hidden actions and inefficient workflows, making it hard for users to identify actionable orders, manage delays, and navigate across channels and warehouses.",
+      "audience": ["Order-management platform users: order fulfillment, inventory administration, marketplace operations across channels and warehouses"],
+      "goals": [
+        "Streamline order processing and reduce cognitive load",
+        "Improve workflow efficiency and enable faster order resolution",
+        "Give users complete visibility into order state across channels"
+      ],
+      "solution": [
+        "Redesigned navigation grouping orders by status",
+        "Workbench approach for managing delays and surfacing actionable orders",
+        "Embedded grids for instant product details",
+        "Prominent suggestive actions for every order and product",
+        "Complete order overview: current state, errors, shipment details",
+        "Dedicated task hub for issue resolution",
+        "Conversational interface for order status, alerts, and prompts"
+      ],
+      "keyMetrics": [],
+      "impact": [],
+      "results": "Streamlined multi-channel order management with a redesigned workbench and task-hub model",
+      "features": [
+        { "name": "Status-grouped navigation" },
+        { "name": "Order workbench" },
+        { "name": "Task hub" },
+        { "name": "Conversational status interface" }
+      ],
+      "solutionSummary": "Workflow redesign + workbench UX",
+      "techStack": ["Design System"],
+      "testimonial": null
+    }
+  ]
+}

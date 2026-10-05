@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3001 http://127.0.0.1:3001; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: http://localhost:3001 http://127.0.0.1:3001; connect-src 'self' http://localhost:3001 http://127.0.0.1:3001;">
+  <title>Codeck</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ─── Sidebar ─────────────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="logo">
+        <div class="logo-mark">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <span class="logo-name">Codeck</span>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-tab="record">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          Record
+        </button>
+
+        <button class="nav-item" data-tab="studio">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Studio
+        </button>
+
+        <p class="nav-section">HISTORY</p>
+        <button class="nav-item" data-tab="history">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Meetings
+        </button>
+
+        <p class="nav-section">CONFIGURATION</p>
+        <button class="nav-item" data-tab="settings">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          Settings
+        </button>
+      </nav>
+    </div>
+
+    <div class="user-footer">
+      <div class="avatar">YT</div>
+      <div class="user-info">
+        <span class="user-name">Chandani Mourya</span>
+        <span class="user-email">chandani.mourya@@copods.co</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ─── Main ─────────────────────────────────────────────── -->
+  <div class="main">
+
+    <!-- ═══ Record View ═══ -->
+    <div id="view-record" class="view active">
+      <div class="view-bar">
+        <div class="view-bar-left">
+          <h2 class="view-bar-title">Record Meeting</h2>
+          <div id="live-badge" class="live-badge hidden">
+            <span class="pulse-dot"></span> Recording
+          </div>
+        </div>
+        <div class="view-bar-right">
+          <span id="timer-display" class="timer hidden">00:00</span>
+          <button id="copy-btn" class="tool-btn hidden" title="Copy transcript">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <div class="split-pane">
+
+        <!-- Transcript panel -->
+        <div class="pane-main">
+          <div id="transcript-empty-state" class="transcript-empty">
+            <div class="empty-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
+            <p class="empty-title">Start recording to capture your meeting</p>
+            <p class="empty-hint">Transcript appears here in real time</p>
+          </div>
+          <div id="transcript-filled" class="transcript-lines hidden">
+            <span id="transcript-text"></span><span id="transcript-interim" class="text-interim"></span>
+            <div id="transcript-end"></div>
+          </div>
+        </div>
+
+        <!-- Controls panel -->
+        <div class="pane-side">
+
+          <!-- Google Calendar -->
+          <div class="ctrl-block" id="cal-block">
+            <div class="cal-header">
+              <p class="ctrl-label">CALENDAR</p>
+              <button id="cal-disconnect-btn" class="cal-disconnect hidden" title="Disconnect">✕</button>
+            </div>
+            <div id="cal-disconnected">
+              <button id="cal-connect-btn" class="btn btn-ghost btn-full btn-sm">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Connect Google Calendar
+              </button>
+              <p id="cal-error" class="form-hint hidden" style="color:#dc2626;margin-top:6px"></p>
+            </div>
+            <div id="cal-connected" class="hidden">
+              <div id="cal-meetings-list" class="cal-meetings"></div>
+              <p id="cal-empty" class="cal-empty hidden">No meetings in the next hour</p>
+            </div>
+          </div>
+
+          <div class="ctrl-block">
+            <p class="ctrl-label">MODE</p>
+            <div class="mode-switcher">
+              <button class="mode-btn active" data-mode="mic">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                Microphone
+              </button>
+              <button class="mode-btn" data-mode="meeting">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Meeting Audio
+              </button>
+            </div>
+          </div>
+
+          <!-- Mic capture -->
+          <div id="mic-interface" class="ctrl-block capture-ctrl">
+            <p class="ctrl-label">CAPTURE</p>
+            <button id="mic-btn" class="record-btn" aria-label="Start recording">
+              <svg class="icon-idle" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              <svg class="icon-active hidden" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+            </button>
+            <p id="mic-hint" class="capture-hint">Press <kbd>Space</kbd> or click to record</p>
+          </div>
+
+          <!-- Meeting capture -->
+          <div id="meeting-interface" class="ctrl-block capture-ctrl hidden">
+            <p class="ctrl-label">CAPTURE</p>
+            <button id="capture-btn" class="record-btn" aria-label="Start capturing">
+              <svg class="icon-idle" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <svg class="icon-active hidden" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+            </button>
+            <p id="capture-hint" class="capture-hint">Pick "Entire Screen" + enable Share Audio — switch tabs freely while recording</p>
+          </div>
+
+          <div id="record-error" class="error-inline hidden"></div>
+
+          <!-- Session actions — shown when transcript has content -->
+          <div id="session-section" class="ctrl-block session-block hidden">
+            <p class="ctrl-label">SESSION</p>
+            <div class="stat-row">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span id="word-count" class="stat-value">0 words</span>
+            </div>
+            <button id="review-btn" class="btn btn-primary btn-full">Review &amp; Generate PPT →</button>
+            <button id="reset-btn" class="btn btn-ghost btn-full">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.57"/></svg>
+              Start Over
+            </button>
+          </div>
+
+        </div><!-- /pane-side -->
+      </div><!-- /split-pane -->
+    </div>
+
+    <!-- ═══ Meeting Detail View ═══ -->
+    <div id="view-detail" class="view">
+      <div class="view-bar">
+        <div class="view-bar-left">
+          <button id="detail-back-btn" class="back-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            Meetings
+          </button>
+          <div class="detail-title-group">
+            <h2 class="view-bar-title" id="detail-title">Meeting</h2>
+            <input id="detail-title-input" class="detail-title-input hidden" type="text" maxlength="120" spellcheck="false">
+            <button id="detail-title-edit-btn" class="title-edit-btn" title="Rename meeting">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </button>
+            <span class="detail-meta" id="detail-meta"></span>
+          </div>
+        </div>
+        <div class="view-bar-right">
+          <button id="detail-copy-btn" class="tool-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+          <button id="detail-generate-btn" class="tool-btn hidden">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Generate PPT
+          </button>
+          <button id="detail-download-btn" class="tool-btn hidden">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PPT
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="detail-tabs">
+        <button class="detail-tab active" data-detail-tab="transcript">Transcript</button>
+        <button class="detail-tab" data-detail-tab="summary">Summary</button>
+      </div>
+
+      <!-- Transcript tab -->
+      <div id="detail-transcript-pane" class="detail-pane">
+        <div class="detail-body">
+
+          <!-- Left: search + entries -->
+          <div class="detail-main">
+            <div class="detail-search-wrap">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input id="detail-search" type="text" placeholder="Search in transcript…" class="search-input" style="width:100%">
+            </div>
+            <div id="detail-transcript-entries" class="transcript-entries"></div>
+          </div>
+
+          <!-- Right: highlights + topics -->
+          <div class="detail-sidebar">
+            <div class="ds-section">
+              <div class="ds-head">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                <span>Key Highlights</span>
+              </div>
+              <div id="detail-highlights-list" class="highlights-list"></div>
+              <button id="highlights-toggle" class="view-all-btn hidden">View all highlights</button>
+            </div>
+            <div class="ds-section">
+              <div class="ds-head">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                <span>Topics</span>
+              </div>
+              <div id="detail-topics-chips" class="topics-chips"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Summary tab -->
+      <div id="detail-summary-pane" class="detail-pane hidden">
+        <div id="detail-summary-content" class="summary-content"></div>
+      </div>
+    </div>
+
+    <!-- ═══ Review View ═══ -->
+    <div id="view-review" class="view">
+      <div class="view-bar">
+        <div class="view-bar-left">
+          <button id="back-btn" class="back-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            Back
+          </button>
+          <h2 class="view-bar-title">Review &amp; Generate</h2>
+        </div>
+        <div class="view-bar-right">
+          <span id="review-word-count" class="text-muted text-sm"></span>
+        </div>
+      </div>
+      <div class="review-content">
+        <div class="form-group">
+          <label for="meeting-title">Meeting title</label>
+          <input id="meeting-title" type="text" placeholder="e.g. Interview with Jane Smith, NovaPay Discovery Call" class="input">
+        </div>
+        <div class="form-group">
+          <label for="client-name">Client / person name</label>
+          <input id="client-name" type="text" placeholder="e.g. Acme Corp, Jane Smith" class="input">
+        </div>
+        <div class="form-group flex-1">
+          <label for="review-textarea">Transcript</label>
+          <textarea id="review-textarea" class="textarea" placeholder="Your meeting transcript…"></textarea>
+          <p class="form-hint">Edit names, numbers, or jargon before generating.</p>
+        </div>
+        <div class="review-actions">
+          <button id="generate-btn" class="btn btn-primary">Generate PPT</button>
+          <button id="clear-btn" class="btn btn-ghost">↺ Clear</button>
+          <button id="sample-btn" class="btn btn-ghost">⌁ Load sample</button>
+          <div id="generate-status" class="hidden"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PPT Intent Modal ═══ -->
+    <div id="intent-modal" class="modal-overlay hidden">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">What kind of presentation?</h3>
+          <p class="modal-subtitle">Pick a preset or describe what you want — the AI will shape the deck accordingly.</p>
+        </div>
+        <div class="modal-body">
+          <div class="chip-group">
+            <button class="chip" data-intent="Set deckType to proposal. Create a client proposal deck. Include Why Copods slide and Engagement Model slide. Pitch Copods services as the solution to client problems.">Client Proposal</button>
+            <button class="chip" data-intent="Set deckType to kickoff. Create a project kickoff deck covering scope, goals, timeline, team, and deliverables. Do NOT include Why Copods or Engagement Model slides.">Project Kickoff</button>
+            <button class="chip" data-intent="Set deckType to strategy. Create an internal strategy presentation covering goals, priorities, roadmap, and decisions. Do NOT include Why Copods or Engagement Model slides.">Strategy Deck</button>
+            <button class="chip" data-intent="Set deckType to other. Create a punchy sales pitch deck. Cover label: SALES PITCH. Use Copods case studies and stats to demonstrate value. Frame the deck around ROI and business outcomes for the client. Include a 'Our Track Record' or 'Why Us' slide using Copods case studies and differentiators. Skip the formal Engagement Model slide.">Sales Pitch</button>
+            <button class="chip" data-intent="Set deckType to status. Create an executive status update covering progress made, current blockers, risks, and decisions needed. Cover label: STATUS UPDATE. Do NOT include Why Copods or Engagement Model slides.">Status Update</button>
+            <button class="chip" data-intent="Set deckType to interview. Create an interview recap deck. Cover label: INTERVIEW RECAP. Capture who was interviewed, their background, key discussion points and responses, strengths observed, areas to explore further, and agreed next steps. Do NOT include Why Copods or Engagement Model slides. Do NOT use the company profile.">Interview Recap</button>
+          </div>
+          <div class="form-group">
+            <label for="intent-input">Or describe it</label>
+            <textarea id="intent-input" class="input" rows="3" placeholder="e.g. a client proposal for a fintech startup focused on UX transformation, emphasise our past fintech work and propose a phased engagement…" style="resize:vertical;min-height:72px;font-size:12.5px;"></textarea>
+          </div>
+          <label class="checkbox-row" for="intent-anonymize">
+            <input id="intent-anonymize" type="checkbox">
+            <span>Anonymize — don't use any product or client names (ours or theirs) in this deck</span>
+          </label>
+        </div>
+        <div class="modal-footer">
+          <button id="intent-cancel" class="btn btn-ghost">Cancel</button>
+          <button id="intent-confirm" class="btn btn-primary">Generate PPT →</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══ Studio View — live preview + chat editing ═══ -->
+    <div id="view-studio" class="view">
+      <div class="view-bar studio-bar">
+        <div class="studio-bar-left">
+          <h2 class="view-bar-title" id="studio-title">Studio</h2>
+          <span class="detail-meta" id="studio-meta"></span>
+        </div>
+        <div class="studio-bar-right">
+          <span id="studio-status" class="studio-status"></span>
+          <!-- Unlabelled, this range input reads as a mystery progress bar.
+               The icon says what it does and the readout proves it responds. -->
+          <label class="zoom-wrap" title="Preview zoom">
+            <svg class="zoom-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg>
+            <input id="studio-zoom" type="range" min="30" max="100" value="62" aria-label="Preview zoom">
+            <span class="zoom-value" id="studio-zoom-value">62%</span>
+          </label>
+          <button id="studio-undo" class="tool-btn" title="Undo last change" disabled>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+          </button>
+          <button id="studio-redo" class="tool-btn" title="Redo last undone change" disabled>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>
+          </button>
+          <button id="studio-export" class="btn btn-primary btn-sm" disabled>Export .pptx</button>
+        </div>
+      </div>
+
+      <div class="studio-body">
+        <!-- middle: the deck -->
+        <div class="studio-preview" id="studio-preview">
+          <div class="sl-empty">
+            Generate a deck from the Record tab, or open one from Meetings, to edit it here.
+          </div>
+        </div>
+
+        <!-- right: the chat -->
+        <aside class="studio-chat">
+          <div class="chat-head">
+            <span class="chat-title">Edit with prompts</span>
+            <button id="chat-clear" class="chat-clear" title="Clear conversation">Clear</button>
+          </div>
+
+          <div id="chat-log" class="chat-log">
+            <div class="chat-hint">
+              <p><strong>Just say what you want.</strong> Name slides by the number you see on them — no need to click first. Clicking a bullet still scopes an edit tighter when you want that.</p>
+              <p class="chat-hint-eg">Try:</p>
+              <ul class="chat-hint-list">
+                <li>merge slides 4, 5 and 6 into one</li>
+                <li>delete slide 4</li>
+                <li>in slide 4, remove the key stat</li>
+                <li>change the key stat on slide 4 to 6 weeks</li>
+                <li>make slide 5's background black</li>
+                <li>make slide 7 dark mode</li>
+                <li>move slide 6 before slide 4</li>
+                <li>add a related image to slide 5</li>
+                <li>paste an image, then: add this image to slide 4</li>
+                <li>add a bar chart to slide 4: mobile 48%, web 33%, in-store 19%</li>
+                <li>swap case study with Kristal</li>
+                <li>make these bullets punchier</li>
+                <li>set the title to NovaPay Onboarding</li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="chat-selection" class="chat-selection hidden">
+            <span class="chat-sel-label">Editing</span>
+            <span id="chat-sel-path" class="chat-sel-path"></span>
+            <button id="chat-sel-clear" class="chat-sel-clear" title="Edit the whole deck instead">✕</button>
+          </div>
+
+          <div id="chat-attachment" class="chat-attachment hidden">
+            <img id="chat-attach-thumb" class="chat-attach-thumb" alt="">
+            <span id="chat-attach-name" class="chat-attach-name"></span>
+            <button id="chat-attach-clear" class="chat-sel-clear" title="Remove this image">✕</button>
+          </div>
+
+          <div class="chat-input-wrap">
+            <input type="file" id="chat-file" accept="image/png,image/jpeg,image/gif,image/webp" hidden>
+            <button id="chat-attach" class="chat-attach-btn" title="Attach an image (or just paste one)">🖼</button>
+            <textarea id="chat-input" class="chat-input" rows="2" placeholder="Describe a change, or paste an image…"></textarea>
+            <button id="chat-send" class="btn btn-primary btn-sm chat-send" disabled>Send</button>
+          </div>
+          <p class="chat-foot" id="chat-foot">Runs locally — nothing leaves this machine.</p>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ═══ History View ═══ -->
+    <div id="view-history" class="view">
+      <div class="view-bar">
+        <h2 class="view-bar-title">Meetings</h2>
+        <div class="view-bar-right">
+          <div class="search-wrap">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="search-input" type="text" placeholder="Search meetings…" class="search-input">
+          </div>
+        </div>
+      </div>
+      <div class="history-content">
+        <div id="meetings-grid"></div>
+      </div>
+    </div>
+
+    <!-- ═══ Settings View ═══ -->
+    <div id="view-settings" class="view">
+      <div class="view-bar">
+        <h2 class="view-bar-title">Settings</h2>
+      </div>
+      <div class="settings-content">
+
+        <div class="settings-card">
+          <div class="settings-card-head">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            <h3>Setup &amp; status</h3>
+          </div>
+          <div id="provider-loading" class="text-muted text-sm">Checking…</div>
+          <div id="provider-info" class="hidden">
+            <div class="provider-row">
+              <span class="status-dot green" id="provider-dot"></span>
+              <strong id="provider-name" class="text-capitalize"></strong>
+              <span class="text-muted text-sm" id="provider-model"></span>
+            </div>
+            <ul class="setup-list" id="setup-list"></ul>
+            <p class="form-hint" id="setup-hint"></p>
+          </div>
+          <hr class="card-divider">
+          <p class="form-hint">
+            Everything runs on this Mac. No transcript, audio or client data is sent anywhere.
+            <span id="privacy-badge" class="privacy-badge"></span>
+          </p>
+        </div>
+
+        <div class="settings-card">
+          <div class="settings-card-head">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <h3>PowerPoint Template</h3>
+          </div>
+          <p class="text-muted text-sm" style="margin-bottom:12px">Upload your organisation's branded <code>.pptx</code> template.</p>
+          <div id="template-drop" class="upload-zone" tabindex="0" role="button" aria-label="Upload template">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#9ca3af"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span id="template-label">Click or drag to upload .pptx</span>
+            <input id="template-file" type="file" accept=".pptx" style="display:none">
+          </div>
+          <div id="upload-status" class="hidden"></div>
+          <p class="form-hint" style="margin-top:8px">If no template is set, a clean professional theme is used.</p>
+        </div>
+
+        <div class="settings-card">
+          <div class="settings-card-head">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <h3>Data Storage</h3>
+          </div>
+          <p class="text-muted text-sm">All data is stored locally at <code>~/.codeck/</code>. Transcripts, generated PPTs, and your template live there — never uploaded to any cloud.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /.main -->
+</div><!-- /.app -->
+
+<script src="app.js"></script>
+<script type="module" src="studio.js"></script>
+</body>
+</html>

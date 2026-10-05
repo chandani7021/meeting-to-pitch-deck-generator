@@ -1,0 +1,124 @@
+{
+  "name": "codeck",
+  "version": "1.0.0",
+  "description": "AI-powered meeting recorder and PPT generator",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "env ELECTRON_RUN_AS_NODE='' electron .",
+    "build": "electron-builder --mac",
+    "server": "ELECTRON_RUN_AS_NODE=1 ./node_modules/electron/dist/Electron.app/Contents/MacOS/Electron server/index.js",
+    "install:all": "npm i && npm i --prefix server",
+    "build:intel": "electron-builder --mac -c.mac.target.0.arch=x64",
+    "doctor": "ELECTRON_RUN_AS_NODE=1 ./node_modules/electron/dist/Electron.app/Contents/MacOS/Electron scripts/doctor.mjs",
+    "setup": "bash scripts/codeck-setup.sh",
+    "build:arm": "electron-builder --mac -c.mac.target.0.arch=arm64",
+    "eval": "ELECTRON_RUN_AS_NODE=1 ./node_modules/electron/dist/Electron.app/Contents/MacOS/Electron scripts/eval-edits.mjs"
+  },
+  "build": {
+    "appId": "co.copods.codeck",
+    "productName": "Codeck",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "entitlements": "electron/entitlements.mac.plist",
+      "entitlementsInherit": "electron/entitlements.mac.plist",
+      "hardenedRuntime": true,
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "Codeck records your voice during a meeting so it can transcribe it on this machine.",
+        "NSAppleEventsUsageDescription": "Codeck reads today's events from the Calendar app so you can pick the meeting you are recording.",
+        "NSCalendarsUsageDescription": "Codeck reads today's events so you can pick the meeting you are recording.",
+        "NSHighResolutionCapable": true,
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true
+        }
+      },
+      "identity": null,
+      "notarize": false
+    },
+    "files": [
+      "electron/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "server",
+        "to": "server",
+        "filter": [
+          "**/*",
+          "!node_modules",
+          "!.env",
+          "!.env.*",
+          "!*.log"
+        ]
+      },
+      {
+        "from": "server/node_modules",
+        "to": "server/node_modules",
+        "filter": [
+          "**/*",
+          "!.bin/**",
+          "!googleapis/**",
+          "!googleapis-common/**",
+          "!openai/**",
+          "!@anthropic-ai/**",
+          "!@google/**",
+          "!groq-sdk/**",
+          "!**/*.d.ts",
+          "!**/*.map",
+          "!@types/**",
+          "!**/test/**",
+          "!**/tests/**",
+          "!**/*.md",
+          "!**/LICENSE*"
+        ]
+      },
+      {
+        "from": "scripts/codeck-setup.sh",
+        "to": "codeck-setup.sh"
+      }
+    ],
+    "asar": true,
+    "dmg": {
+      "title": "Codeck ${version}",
+      "window": {
+        "width": 560,
+        "height": 420
+      },
+      "contents": [
+        {
+          "x": 150,
+          "y": 160
+        },
+        {
+          "x": 410,
+          "y": 160,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 150,
+          "y": 310,
+          "type": "file",
+          "path": "scripts/codeck-setup.sh"
+        },
+        {
+          "x": 410,
+          "y": 310,
+          "type": "file",
+          "path": "scripts/READ-ME-FIRST.txt"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0",
+    "electron": "^42.5.0",
+    "electron-builder": "^26.15.3"
+  }
+}
